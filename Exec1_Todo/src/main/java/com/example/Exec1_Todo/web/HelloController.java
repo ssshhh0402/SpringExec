@@ -1,4 +1,4 @@
-package com.example.Exec1_Todo.service;
+package com.example.Exec1_Todo.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
