@@ -3,8 +3,8 @@ package com.example.Exec1_Todo.service;
 
 import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.domain.user.UserRepository;
-import com.example.Exec1_Todo.web.dto.UserLoginDto;
-import com.example.Exec1_Todo.web.dto.UserSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.User.UserLoginDto;
+import com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     @Transactional
-    public String save(UserSaveRequestDto requestDto){
-        return userRepository.save(requestDto.toEntity()).getEmail();
+    public User save(UserSaveRequestDto requestDto){
+        return userRepository.save(requestDto.toEntity());
     }
 
-    public String findByEmail(String email){
-        return userRepository.findByEmail(email).getPassword();
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
     public Boolean login(UserLoginDto requestDto){

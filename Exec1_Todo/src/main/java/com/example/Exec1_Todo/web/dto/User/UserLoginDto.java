@@ -1,4 +1,4 @@
-package com.example.Exec1_Todo.web.dto;
+package com.example.Exec1_Todo.web.dto.User;
 
 import lombok.Builder;
 import lombok.Getter;

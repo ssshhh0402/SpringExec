@@ -49,3 +49,28 @@
 
 
 
+* 4월 16일
+  * Post 관련 기능 API 구현
+    * Post 생성
+      * Url : (Post)/api/v1/post/
+      * RequestParams로 이메일, Contents, isDone(boolean)
+    * Post 삭제
+      * Url : (Delete) /api/v1/post/delete/{id}
+      * PathVariable로 postId 전달받아 해당 Post 삭제
+    * Post 변경
+      * Url : (Post) /api/v1/post/update
+      * RequestParams로 id, 이메일, Contents, isDone을 받아 id값과 동일한 Post를 전달받은 내용으로 변경
+    * Post 불러오기
+      * 모든 포스트 불러오기
+        * Url : (Get) /api/v1/post/
+        * 현재 저장되어 있는 모든 포스트 출력
+      * 특정 유저가 작성한 포스트 불러오기
+        * Url : (Get) /api/v1/post/{email}
+        * Path Variable로 받은 이메일이 작성한 포스트 출력
+      * 특정 유저가 작성한 포스트의 상태에 따라 출력
+        * Url : (Get) /api/v1/post/{email}/{isDone}
+        * Path Variable로 이메일과 isDone(boolean)을 받아 일치하는 포스트 출력
+* 보완점 / 궁금한 점
+  * Post 관련 Swagger에서 확인했을 때 User와 다른 것이 있는데 왜 다른지..? Id와 Post Id 왜 둘다 나오는지 확인해보고 수정해야한다
+* 다음에 할 것
+  * Real Db(연동)

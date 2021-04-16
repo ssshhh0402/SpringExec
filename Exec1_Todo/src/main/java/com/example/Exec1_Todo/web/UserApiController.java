@@ -2,8 +2,8 @@ package com.example.Exec1_Todo.web;
 
 import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.service.UserService;
-import com.example.Exec1_Todo.web.dto.UserLoginDto;
-import com.example.Exec1_Todo.web.dto.UserSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.User.UserLoginDto;
+import com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class UserApiController {
         return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/api/v1/user/find/{email}")
-    public ResponseEntity<String> findByEmail(@PathVariable String email){
-        return new ResponseEntity<String>(userService.findByEmail(email), HttpStatus.OK);
+    public ResponseEntity<User> findByEmail(@PathVariable String email){
+        return new ResponseEntity<User>(userService.findByEmail(email), HttpStatus.OK);
     }
     @PostMapping("/api/v1/user")
-    public ResponseEntity<String> save(@RequestBody UserSaveRequestDto requestDto){
-        return new ResponseEntity<String>(userService.save(requestDto), HttpStatus.OK);
+    public ResponseEntity<User> save(@RequestBody UserSaveRequestDto requestDto){
+        return new ResponseEntity<User>(userService.save(requestDto), HttpStatus.OK);
     }
     @PostMapping("/api/v1/user/login")
     public ResponseEntity<Boolean> login(@RequestBody UserLoginDto requestDto){
