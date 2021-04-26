@@ -74,3 +74,47 @@
   * Post 관련 Swagger에서 확인했을 때 User와 다른 것이 있는데 왜 다른지..? Id와 Post Id 왜 둘다 나오는지 확인해보고 수정해야한다
 * 다음에 할 것
   * Real Db(연동)
+
+---
+
+* 4월 26일
+
+  * Mysql 및 mysql-workbench 설치
+
+  * JPA와 Db(Mysql) 연동 완료
+
+    * build.gradle에 dependency 추가
+
+    ~~~Java
+    ...	
+    compile('mysql:mysql-connector-java')
+    ~~~
+
+    
+
+    * properties 설정
+
+    ~~~Java
+    spring.jpa.show-sql=true
+    spring.jpa.generate-ddl=true
+    spring.jpa.database=mysql
+    spring.datasource.url=jdbc:mysql://localhost:3306/todo?autoReconnect=true&useSSL=true&serverTimezone=Asia/Seoul
+    spring.datasource.username=**
+    spring.datasource.password=**
+    spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+    spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
+    
+    ~~~
+
+    * Generate-ddl : true => 테이블이 존재하지않을경우 자동으로 생성
+    * show-sql : true => sql  명령어들을 Log로 볼수 있게 설정함
+    * datasource.username & password : database 유저이름과 비밀번호
+
+* 보완점 && 해야할 것:
+
+  * 직접 연결해서 넣어보니 수정해야할게 많다... 일단 한번 수정하고 가야할듯
+  * 일단 Post email(글쓴이) 와 User가 Foreign Key로 연결 안 돼어있다
+  * 이거말고 Database 좀더 견고하게 수정해야할듯
+
+  
+
