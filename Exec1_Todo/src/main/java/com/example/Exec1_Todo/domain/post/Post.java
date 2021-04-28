@@ -5,14 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+// Entity Dto 분리
+
 @Getter
 @NoArgsConstructor
 @Entity
 public class Post {
     @Id
+    @GeneratedValue
     private Long postId;
 
     @Column(nullable = false)
@@ -23,8 +24,7 @@ public class Post {
     @Column(nullable = false)
     private boolean isDone;
     @Builder
-    public Post(Long postId, String email, String contents, Boolean isDone){
-        this.postId = postId;
+    public Post(String email, String contents, Boolean isDone){
         this.email = email;
         this.contents = contents;
         this.isDone = isDone;
@@ -32,7 +32,15 @@ public class Post {
     public Long getId(){
         return this.postId;
     }
-
+    public String getEmail(){
+        return this.email;
+    }
+    public String getContents(){
+        return this.contents;
+    }
+    public boolean getIsDone(){
+        return this.isDone;
+    }
     public void update(PostSaveRequestDto requestDto){
         this.contents = requestDto.getContents();
         this.isDone = requestDto.getIsDone();
