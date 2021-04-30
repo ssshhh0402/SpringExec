@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Post {
     @Id
     @GeneratedValue
+    @Column(name="POST_id")
     private Long postId;
 
     @Column(nullable = false)

@@ -24,6 +24,7 @@ public class PostService {
         }
         return result;
     }
+
     public List<PostResponseDto> findByEmail(String email){
         List<Post> posts = postRepository.findAllByEmail(email);
         List<PostResponseDto> result = new ArrayList<PostResponseDto>();
@@ -46,12 +47,14 @@ public class PostService {
         }
         return result;
     }
+
     @Transactional
     public PostResponseDto update(PostSaveRequestDto requestDto, long id){
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요") );
         post.update(requestDto);
         return new PostResponseDto(post);
     }
+
     @Transactional
     public String deleteAll(){
         try{
@@ -61,6 +64,7 @@ public class PostService {
             return "Failure";
         }
     }
+
     @Transactional
     public String delete(long id){
         try{

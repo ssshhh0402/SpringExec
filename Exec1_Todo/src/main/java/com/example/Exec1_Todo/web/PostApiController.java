@@ -1,6 +1,5 @@
 package com.example.Exec1_Todo.web;
 
-import com.example.Exec1_Todo.domain.post.Post;
 import com.example.Exec1_Todo.service.PostService;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;

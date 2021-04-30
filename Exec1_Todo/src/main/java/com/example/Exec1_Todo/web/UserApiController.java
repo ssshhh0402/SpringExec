@@ -1,6 +1,5 @@
 package com.example.Exec1_Todo.web;
 
-import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.service.UserService;
 import com.example.Exec1_Todo.web.dto.User.UserLoginDto;
 import com.example.Exec1_Todo.web.dto.User.UserResponseDto;
@@ -9,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController

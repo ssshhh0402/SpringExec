@@ -19,12 +19,13 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+
     @Transactional
     public UserResponseDto save(UserSaveRequestDto requestDto){
-        User request = requestDto.toEntity();
         User user = userRepository.save(requestDto.toEntity());
         return new UserResponseDto(user);
     }
+
     @Transactional
     public String deleteAll(){
         try{
@@ -34,6 +35,7 @@ public class UserService {
             return "Fail";
         }
     }
+
     public UserResponseDto findByEmail(String email){
         User user = userRepository.findByEmail(email);
         return new UserResponseDto(user);
@@ -42,6 +44,7 @@ public class UserService {
     public Boolean login(UserLoginDto requestDto){
         return requestDto.getPassword().equals(userRepository.findByEmail(requestDto.getEmail()).getPassword());
     }
+
     public List<UserResponseDto> findAll(){
         List<User> users = userRepository.findAll();
         List<UserResponseDto> result = new ArrayList<UserResponseDto>();
