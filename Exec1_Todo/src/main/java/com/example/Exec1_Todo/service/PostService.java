@@ -2,6 +2,7 @@ package com.example.Exec1_Todo.service;
 
 import com.example.Exec1_Todo.domain.post.Post;
 import com.example.Exec1_Todo.domain.post.PostRepository;
+import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;

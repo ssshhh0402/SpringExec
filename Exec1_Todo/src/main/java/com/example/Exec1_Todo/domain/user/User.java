@@ -1,12 +1,12 @@
 package com.example.Exec1_Todo.domain.user;
 
 import com.example.Exec1_Todo.domain.post.Post;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,9 +14,8 @@ import java.util.List;
 @Entity
 public class User{
     @Id
-    @GeneratedValue
-    @Column(name="USER_id")
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String email;
@@ -24,16 +23,16 @@ public class User{
     @Column(nullable = false)
     private String password;
 
-    @OneToMany
-    @JoinColumn(name="POST_id")
-    private List<Post> posts = new ArrayList<Post>();
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<Post> posts;
+
     @Builder
     public User(String email, String password){
         this.email = email;
         this.password = password;
     }
 
-    public long getId(){return this.userId;}
     public String getEmail(){
         return this.email;
     }
