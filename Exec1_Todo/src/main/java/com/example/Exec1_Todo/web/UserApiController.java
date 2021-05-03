@@ -20,6 +20,10 @@ public class UserApiController {
     public ResponseEntity<String> deleteAll(){
         return new ResponseEntity<String>(userService.deleteAll(), HttpStatus.OK);
     }
+    @DeleteMapping("/api/v1/user/delete/{userId}")
+    public ResponseEntity<String> deleteOne( @PathVariable long userId){
+        return new ResponseEntity<String>(userService.deleteOne(userId), HttpStatus.OK);
+    }
     @GetMapping("/api/v1/user/")
     public ResponseEntity<List<UserResponseDto>> findAllUser(){
         return new ResponseEntity<List<UserResponseDto>>(userService.findAll(), HttpStatus.OK);

@@ -20,7 +20,10 @@ public class PostApiController {
     public ResponseEntity<List<PostResponseDto>> findAllPost(){
         return new ResponseEntity<List<PostResponseDto>>(postService.findAll(), HttpStatus.OK);
     }
-
+    @GetMapping("/api/v1/post/{id}")
+    public ResponseEntity<PostResponseDto> findOne(@PathVariable long id){
+        return new ResponseEntity<PostResponseDto>(postService.findOne(id), HttpStatus.OK);
+    }
     @GetMapping("/api/v1/post/{email}/")
     public ResponseEntity<List<PostResponseDto>> findAllByEmail(@PathVariable String email){
         return new ResponseEntity<List<PostResponseDto>>(postService.findByEmail(email), HttpStatus.OK);

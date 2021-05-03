@@ -1,5 +1,6 @@
 package com.example.Exec1_Todo.domain.user;
 
+import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.post.Post;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
@@ -23,9 +24,13 @@ public class User{
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Comment> comments;
 
     @Builder
     public User(String email, String password){
@@ -33,6 +38,9 @@ public class User{
         this.password = password;
     }
 
+    public List<Post> getPosts(){
+        return this.posts;
+    }
     public String getEmail(){
         return this.email;
     }

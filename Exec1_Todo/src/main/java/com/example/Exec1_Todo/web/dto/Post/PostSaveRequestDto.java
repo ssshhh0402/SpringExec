@@ -10,24 +10,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostSaveRequestDto {
     private String contents;
-    private User user;
+    private long userId;
     private boolean isDone;
 
 
     @Builder
-    public PostSaveRequestDto(String a, boolean b, User user){
-        this.user = user;
+    public PostSaveRequestDto(String a, boolean b, long c){
         this.contents = a;
         this.isDone = b;
+        this.userId = c;
     }
 
-    public Post toEntity(){
+
+    public Post toEntity(User user){
         return Post.builder()
-                .email(this.user.getEmail())
+                .email(user.getEmail())
                 .contents(this.contents)
                 .isDone(this.isDone)
-                .user(this.user)
+                .user(user)
                 .build();
+    }
+    public long getUserId(){
+        return this.userId;
     }
     public String getContents(){
         return this.contents;

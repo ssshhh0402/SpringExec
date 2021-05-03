@@ -36,6 +36,15 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public String deleteOne(long userId){
+        try{
+            userRepository.deleteById(userId);
+            return "Success";
+        }catch(Exception e){
+            return "Fail";
+        }
+    }
     public UserResponseDto findByEmail(String email){
         User user = userRepository.findByEmail(email);
         return new UserResponseDto(user);

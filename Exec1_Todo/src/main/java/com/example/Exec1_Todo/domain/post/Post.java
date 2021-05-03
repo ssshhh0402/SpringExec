@@ -1,13 +1,16 @@
 package com.example.Exec1_Todo.domain.post;
 
+import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -28,6 +31,10 @@ public class Post {
     @ManyToOne
     @JsonBackReference
     private User user;
+
+    @OneToMany
+    @JsonBackReference
+    private List<Comment> comments;
 
     @Builder
     public Post(String email, String contents, Boolean isDone, User user){

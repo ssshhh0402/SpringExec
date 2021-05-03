@@ -3,6 +3,7 @@ package com.example.Exec1_Todo.service;
 import com.example.Exec1_Todo.domain.post.Post;
 import com.example.Exec1_Todo.domain.post.PostRepository;
 import com.example.Exec1_Todo.domain.user.User;
+import com.example.Exec1_Todo.domain.user.UserRepository;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     public List<PostResponseDto> findAll(){
         List<Post> posts = postRepository.findAll();
@@ -35,9 +37,14 @@ public class PostService {
         return result;
     }
 
+    public PostResponseDto findOne(long id){
+        Post result = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요"));
+        return new PostResponseDto(result);
+    }
     @Transactional
     public PostResponseDto save(PostSaveRequestDto requestDto){
-        Post post = postRepository.save(requestDto.toEntity());
+        User author = userRepository.findById(requestDto.getUserId());
+        Post post = postRepository.save(requestDto.toEntity(author));
         return new PostResponseDto(post);
     }
     public List<PostResponseDto> findByEmailAndIsDone(String email, boolean isDone){
