@@ -2,14 +2,21 @@ package com.example.Exec1_Todo.service;
 
 import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.comment.CommentRepository;
+import com.example.Exec1_Todo.domain.post.Post;
+import com.example.Exec1_Todo.domain.post.PostRepository;
+import com.example.Exec1_Todo.domain.user.User;
+import com.example.Exec1_Todo.domain.user.UserRepository;
 import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
+import com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommentService {
     private final CommentRepository commentRepository;
-
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     public List<CommentResponseDto> getAll(){
         List<Comment> comments = commentRepository.findAll();
@@ -18,5 +25,12 @@ public class CommentService {
             result.add(new CommentResponseDto(comment));
         }
         return result;
+    }
+
+    public CommentResponseDto save(CommentSaveRequestDto requestDto){
+        User author = userRepository.findById(requestDto.getUserId());
+        Post post = postRepository.findById(requestDto.getPostId()).orElseThrow(() -> new IllegalArgumentException("Post"));
+        Comment result = commentRepository.save(requestDto.toEntity(author,post));
+        return new CommentResponseDto(result);
     }
 }

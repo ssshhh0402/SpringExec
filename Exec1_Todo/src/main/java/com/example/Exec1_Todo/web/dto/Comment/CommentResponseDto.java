@@ -4,7 +4,11 @@ import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.post.Post;
 import com.example.Exec1_Todo.domain.user.User;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 public class CommentResponseDto {
     private long id;
     private String contents;
