@@ -45,8 +45,10 @@ public class User{
     }
     public List<CommentResponseDto> getComments(){
         List<CommentResponseDto> comments = new ArrayList<CommentResponseDto>();
-        for(Comment comment : this.comments){
-            comments.add(new CommentResponseDto(comment));
+        if(this.comments != null) {
+            for (Comment comment : this.comments) {
+                comments.add(new CommentResponseDto(comment));
+            }
         }
         return comments;
     }

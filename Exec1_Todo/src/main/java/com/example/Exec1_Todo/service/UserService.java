@@ -8,6 +8,7 @@ import com.example.Exec1_Todo.web.dto.User.UserResponseDto;
 import com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,10 +20,12 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public UserResponseDto save(UserSaveRequestDto requestDto){
-        User user = userRepository.save(requestDto.toEntity());
+        String encoded = passwordEncoder.encode(requestDto.getPassword());
+        User user = userRepository.save(requestDto.toEntity(encoded));
 
         return new UserResponseDto(user);
     }
@@ -52,7 +55,12 @@ public class UserService {
     }
 
     public Boolean login(UserLoginDto requestDto){
-        return requestDto.getPassword().equals(userRepository.findByEmail(requestDto.getEmail()).getPassword());
+        User user = userRepository.findByEmail(requestDto.getEmail());
+        if(!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public List<UserResponseDto> findAll(){

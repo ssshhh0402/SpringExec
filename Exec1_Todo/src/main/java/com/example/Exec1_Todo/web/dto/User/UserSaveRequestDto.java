@@ -12,19 +12,20 @@ public class UserSaveRequestDto {
     private String password;
 
 
-
     @Builder
     public UserSaveRequestDto(String b, String c){
         this.email = b;
         this.password = c;
     }
 
-    public User toEntity(){
+    public User toEntity(String encoded){
         return User.builder()
                 .email(this.email)
-                .password(this.password)
+                .password(encoded)
                 .build();
     }
 
-
+    public String getPassword(){
+        return this.password;
+    }
 }
