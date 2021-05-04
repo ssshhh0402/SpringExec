@@ -18,7 +18,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column
     private String contents;
 
@@ -31,10 +30,10 @@ public class Comment {
     private Post post;
 
     @Builder
-    public Comment(String a, User b, Post c){
-        this.contents = a;
-        this.user = b;
-        this.post = c;
+    public Comment(String contents, User user, Post post){
+        this.contents = contents;
+        this.user = user;
+        this.post = post;
     }
 
     public User getUser(){
@@ -42,5 +41,8 @@ public class Comment {
     }
     public Post getPost(){
         return this.post;
+    }
+    public String getContents(){
+        return this.contents;
     }
 }

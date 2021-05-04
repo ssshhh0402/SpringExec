@@ -6,10 +6,7 @@ import com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,9 @@ public class CommentApiController {
     @PostMapping("/api/v1/comment/save/")
     public ResponseEntity<CommentResponseDto> save(@RequestBody CommentSaveRequestDto requestDto){
         return new ResponseEntity<CommentResponseDto>(commentService.save(requestDto), HttpStatus.OK);
+    }
+    @DeleteMapping("/api/v1/comments/delete/")
+    public ResponseEntity<String> deleteAll(){
+        return new ResponseEntity<String>(commentService.deleteAll(), HttpStatus.OK);
     }
 }

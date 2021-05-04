@@ -8,11 +8,14 @@ import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.domain.user.UserRepository;
 import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
 import com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto;
-import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
+@Service
 public class CommentService {
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
@@ -32,5 +35,13 @@ public class CommentService {
         Post post = postRepository.findById(requestDto.getPostId()).orElseThrow(() -> new IllegalArgumentException("Post"));
         Comment result = commentRepository.save(requestDto.toEntity(author,post));
         return new CommentResponseDto(result);
+    }
+    public String deleteAll(){
+        try{
+            commentRepository.deleteAll();
+            return "Success";
+        }catch(Exception e){
+            return "Fail";
+        }
     }
 }

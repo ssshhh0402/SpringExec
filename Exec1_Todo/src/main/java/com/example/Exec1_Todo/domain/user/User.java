@@ -2,12 +2,14 @@ package com.example.Exec1_Todo.domain.user;
 
 import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.post.Post;
+import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -41,10 +43,18 @@ public class User{
     public List<Post> getPosts(){
         return this.posts;
     }
+    public List<CommentResponseDto> getComments(){
+        List<CommentResponseDto> comments = new ArrayList<CommentResponseDto>();
+        for(Comment comment : this.comments){
+            comments.add(new CommentResponseDto(comment));
+        }
+        return comments;
+    }
     public String getEmail(){
         return this.email;
     }
     public String getPassword(){
         return this.password;
     }
+
 }

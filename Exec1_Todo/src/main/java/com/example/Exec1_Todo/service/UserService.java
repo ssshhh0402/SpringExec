@@ -23,6 +23,7 @@ public class UserService {
     @Transactional
     public UserResponseDto save(UserSaveRequestDto requestDto){
         User user = userRepository.save(requestDto.toEntity());
+
         return new UserResponseDto(user);
     }
 

@@ -38,15 +38,17 @@ public class PostService {
     }
 
     public PostResponseDto findOne(long id){
-        Post result = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요"));
-        return new PostResponseDto(result);
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요"));
+        return new PostResponseDto(post);
     }
+
     @Transactional
     public PostResponseDto save(PostSaveRequestDto requestDto){
         User author = userRepository.findById(requestDto.getUserId());
         Post post = postRepository.save(requestDto.toEntity(author));
         return new PostResponseDto(post);
     }
+
     public List<PostResponseDto> findByEmailAndIsDone(String email, boolean isDone){
         List<Post> posts = postRepository.findByEmailAndIsDone(email, isDone);
         List<PostResponseDto> result = new ArrayList<PostResponseDto>();
@@ -82,6 +84,7 @@ public class PostService {
             return "Fail";
         }
     }
+
 
 
 

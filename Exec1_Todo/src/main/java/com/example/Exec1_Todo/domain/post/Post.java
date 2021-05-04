@@ -2,6 +2,7 @@ package com.example.Exec1_Todo.domain.post;
 
 import com.example.Exec1_Todo.domain.comment.Comment;
 import com.example.Exec1_Todo.domain.user.User;
+import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,7 +34,7 @@ public class Post {
     @JsonBackReference
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Comment> comments;
 
@@ -51,6 +53,13 @@ public class Post {
     }
     public boolean getIsDone(){
         return this.isDone;
+    }
+    public List<CommentResponseDto> getComments(){
+        List<CommentResponseDto> comments = new ArrayList<CommentResponseDto>();
+        for(Comment comment : this.comments){
+            comments.add(new CommentResponseDto(comment));
+        }
+        return comments;
     }
     public void update(PostSaveRequestDto requestDto){
         this.contents = requestDto.getContents();
