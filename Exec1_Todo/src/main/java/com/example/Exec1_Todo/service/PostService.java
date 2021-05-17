@@ -7,6 +7,7 @@ import com.example.Exec1_Todo.domain.user.UserRepository;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,7 +39,8 @@ public class PostService {
     }
 
     public PostResponseDto findOne(long id){
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요"));
+        Post post = postRepository.findById(id);
+//        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요"));
         return new PostResponseDto(post);
     }
 
@@ -60,7 +62,8 @@ public class PostService {
 
     @Transactional
     public PostResponseDto update(PostSaveRequestDto requestDto, long id){
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요") );
+        Post post = postRepository.findById(id);
+//        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("오류가 발생했습니다. 다시 시도해주세요") );
         post.update(requestDto);
         return new PostResponseDto(post);
     }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -29,11 +31,18 @@ public class Comment {
     @JsonBackReference
     private Post post;
 
+    @ManyToOne
+    private Comment superComments;
+
+    @OneToMany(mappedBy = "superComments",cascade= CascadeType.ALL)
+    private List<Comment> subComments = new ArrayList<Comment>();
+
     @Builder
-    public Comment(String contents, User user, Post post){
+    public Comment(String contents, User user, Post post, Comment superComments){
         this.contents = contents;
         this.user = user;
         this.post = post;
+        this.superComments = superComments;
     }
 
     public User getUser(){
@@ -44,5 +53,8 @@ public class Comment {
     }
     public String getContents(){
         return this.contents;
+    }
+    public List<Comment> getSubComments(){
+        return this.subComments;
     }
 }

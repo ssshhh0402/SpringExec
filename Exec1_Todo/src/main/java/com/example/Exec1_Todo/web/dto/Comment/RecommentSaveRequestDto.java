@@ -9,23 +9,26 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class CommentSaveRequestDto {
-    private long userId, postId;
-    private String contents;
+public class RecommentSaveRequestDto {
+    long userId, postId, superId;
+    String contents;
 
     @Builder
-    public CommentSaveRequestDto(long a, long b, String c){
+    public RecommentSaveRequestDto(long a, long b, long c, String d){
         this.userId = a;
         this.postId = b;
-        this.contents = c;
+        this.superId = c;
+        this.contents = d;
     }
-    public Comment toEntity(User user, Post post){
+
+    public Comment toEntity(User user, Post post, Comment superComments){
         return Comment.builder()
                 .contents(this.contents)
                 .user(user)
                 .post(post)
-                .superComments(null)
+                .superComments(superComments)
                 .build();
+
     }
 
     public long getUserId(){
@@ -33,5 +36,8 @@ public class CommentSaveRequestDto {
     }
     public long getPostId(){
         return this.postId;
+    }
+    public long getSuperId(){
+        return this.superId;
     }
 }
