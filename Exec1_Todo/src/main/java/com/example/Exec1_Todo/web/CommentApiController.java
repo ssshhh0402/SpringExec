@@ -3,7 +3,7 @@ package com.example.Exec1_Todo.web;
 import com.example.Exec1_Todo.service.CommentService;
 import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
 import com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto;
-import com.example.Exec1_Todo.web.dto.Comment.RecommentSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.Comment.SubCommentSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class CommentApiController {
         return new ResponseEntity<String>(commentService.deleteAll(), HttpStatus.OK);
     }
     @PutMapping("/api/v1/comments/recomment/")
-    public ResponseEntity<CommentResponseDto> recomments(@RequestBody RecommentSaveRequestDto requestDto){
+    public ResponseEntity<CommentResponseDto> recomments(@RequestBody SubCommentSaveRequestDto requestDto){
         return new ResponseEntity<CommentResponseDto> (commentService.resave(requestDto), HttpStatus.OK);
     }
 }

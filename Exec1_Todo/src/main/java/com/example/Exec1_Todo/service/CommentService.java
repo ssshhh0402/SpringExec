@@ -8,9 +8,8 @@ import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.domain.user.UserRepository;
 import com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto;
 import com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto;
-import com.example.Exec1_Todo.web.dto.Comment.RecommentSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.Comment.SubCommentSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,17 +26,28 @@ public class CommentService {
         List<Comment> comments = commentRepository.findAll();
         List<CommentResponseDto> result = new ArrayList<CommentResponseDto>();
         for (Comment comment : comments) {
-            result.add(new CommentResponseDto(comment));
+            List<CommentResponseDto> subs = new ArrayList<CommentResponseDto>();
+            for(Comment sub : comment.getSubComments()){
+                subs.add(getSub(sub));
+            }
+            result.add(new CommentResponseDto(comment, subs));
         }
         return result;
     }
-
+    public CommentResponseDto getSub(Comment target){
+        List<CommentResponseDto> subs = new ArrayList<CommentResponseDto>();
+        for (Comment sub : target.getSubComments()){
+            subs.add(getSub(sub));
+        }
+        return new CommentResponseDto(target, subs);
+    }
     public CommentResponseDto save(CommentSaveRequestDto requestDto) {
         User author = userRepository.findById(requestDto.getUserId());
         Post post = postRepository.findById(requestDto.getPostId());
 //        Post post = postRepository.findById(requestDto.getPostId()).orElseThrow(() -> new IllegalArgumentException("Post"));
         Comment result = commentRepository.save(requestDto.toEntity(author, post));
-        return new CommentResponseDto(result);
+        List<CommentResponseDto> lists = new ArrayList<CommentResponseDto>();
+        return new CommentResponseDto(result, lists);
     }
 
     public String delete(long id) {
@@ -58,11 +68,12 @@ public class CommentService {
         }
     }
 
-    public CommentResponseDto resave(RecommentSaveRequestDto requestDto) {
+    public CommentResponseDto resave(SubCommentSaveRequestDto requestDto) {
         User author = userRepository.findById(requestDto.getUserId());
         Post post = postRepository.findById(requestDto.getPostId());
         Comment supers = commentRepository.findById(requestDto.getSuperId());
         Comment result = commentRepository.save(requestDto.toEntity(author, post, supers));
-        return new CommentResponseDto(result);
+        List<CommentResponseDto> lists = new ArrayList<CommentResponseDto>();
+        return new CommentResponseDto(result, lists);
     }
 }

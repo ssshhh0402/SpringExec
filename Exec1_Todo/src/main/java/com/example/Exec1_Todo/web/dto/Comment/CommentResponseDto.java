@@ -15,14 +15,14 @@ public class CommentResponseDto {
     private String contents;
     private String userEmail;
     private long postId, userId;
-    private List<Comment> subComments;
+    private List<CommentResponseDto>subComments;
     @Builder
-    public CommentResponseDto(Comment comment){
+    public CommentResponseDto(Comment comment, List<CommentResponseDto> lists){
         this.id = comment.getId();
         this.userId = comment.getUser().getId();
         this.postId = comment.getPost().getId();
         this.contents = comment.getContents();
         this.userEmail = comment.getUser().getEmail();
-        this.subComments = comment.getSubComments();
+        this.subComments = lists;
     }
 }

@@ -57,9 +57,20 @@ public class Post {
     public List<CommentResponseDto> getComments(){
         List<CommentResponseDto> comments = new ArrayList<CommentResponseDto>();
         for(Comment comment : this.comments){
-            comments.add(new CommentResponseDto(comment));
+            List<CommentResponseDto> subs = new ArrayList<CommentResponseDto>();
+            for(Comment sub : comment.getSubComments()){
+                subs.add(findSubs(sub));
+            }
+            comments.add(new CommentResponseDto(comment,subs));
         }
         return comments;
+    }
+    public CommentResponseDto findSubs(Comment target){
+        List<CommentResponseDto> subs = new ArrayList<CommentResponseDto>();
+        for(Comment comment : target.getSubComments()){
+            subs.add(findSubs(comment));
+        }
+        return new CommentResponseDto(target, subs);
     }
     public void update(PostSaveRequestDto requestDto){
         this.contents = requestDto.getContents();
