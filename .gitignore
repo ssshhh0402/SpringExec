@@ -12,8 +12,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-.src/main/resources/application.properties
-
+*.properties
 # Generated files
 .idea/**/contentModel.xml
 
