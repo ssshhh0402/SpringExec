@@ -1,9 +1,7 @@
 package com.example.Exec1_Todo.web;
 
 import com.example.Exec1_Todo.service.UserService;
-import com.example.Exec1_Todo.web.dto.User.UserLoginDto;
-import com.example.Exec1_Todo.web.dto.User.UserResponseDto;
-import com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto;
+import com.example.Exec1_Todo.web.dto.User.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,17 +30,21 @@ public class UserApiController {
     public ResponseEntity<UserResponseDto> findByEmail(@PathVariable String email){
         return new ResponseEntity<UserResponseDto>(userService.findByEmail(email), HttpStatus.OK);
     }
+    @GetMapping("/api/v1/user/find/send/{email}")
+    public ResponseEntity<String> findEmail(@PathVariable String email){
+        return new ResponseEntity<String>(userService.findEmail(email), HttpStatus.OK);
+    }
     @PostMapping("/api/v1/user")
     public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto requestDto){
         return new ResponseEntity<UserResponseDto>(userService.save(requestDto), HttpStatus.OK);
     }
     @PostMapping("/api/v1/user/login")
-    public ResponseEntity<Boolean> login(@RequestBody UserLoginDto requestDto){
-        Boolean result = userService.login(requestDto);
-        if(result){
-            return new ResponseEntity<Boolean>(result, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<Boolean>(result, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginDto requestDto){
+        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
+    }
+    @PutMapping("api/v1/user/change")
+    public ResponseEntity<UserLoginResponseDto> change(@RequestBody UserInfoChangeDto requestDto){
+        return new ResponseEntity<UserLoginResponseDto>(userService.changePassword(requestDto), HttpStatus.OK);
+
     }
 }
