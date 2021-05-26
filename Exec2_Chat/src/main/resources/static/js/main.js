@@ -71,15 +71,14 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
     var messageElement = document.createElement('li');
     console.log(message);
-    if(message.messageType === 'JOIN') {
+    if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' joined!';
-    } else if (message.messageType === 'LEAVE') {
+        message.content = message.sender + ' has join the server!';
+    } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' left!';
+        message.content = message.sender + ' has left the server!';
     } else {
         messageElement.classList.add('chat-message');
-
         var avatarElement = document.createElement('i');
         var avatarText = document.createTextNode(message.sender[0]);
         avatarElement.appendChild(avatarText);

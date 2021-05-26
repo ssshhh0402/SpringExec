@@ -27,10 +27,7 @@ public class WebSocketEventListener {
     public void handleWebSocketConnectEventListener(SessionConnectEvent event){
         logger.info(event.toString());
         logger.info("새로운 사람 Connected!!");
-        logger.info(event.getMessage().toString());
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        Map temps = headerAccessor.getSessionAttributes();
-        System.out.println(temps);
+
     }
 
     @EventListener
@@ -44,7 +41,7 @@ public class WebSocketEventListener {
         if(userName != null){
             logger.info("UserName : " + userName);
             ChatMessage chatMessage = new ChatMessage();
-            chatMessage.setMessageType(MessageType.LEAVE);
+            chatMessage.setType(MessageType.LEAVE);
             chatMessage.setSender(userName);
             messageSendingOperations.convertAndSend("/topic/public", chatMessage);
         }

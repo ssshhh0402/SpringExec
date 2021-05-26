@@ -1,15 +1,15 @@
 package com.example.Exec2_Chat.domain;
 
 public class ChatMessage {
-    private MessageType messageType;
+    private MessageType type;
     private String content;
     private String sender;
 
-    public void setMessageType(MessageType type){
-        this.messageType = type;
+    public void setType(MessageType type){
+        this.type = type;
     }
-    public MessageType getMessageType(){
-        return this.messageType;
+    public MessageType getType(){
+        return this.type;
     }
     public void setContent(String a){
         this.content = a;
