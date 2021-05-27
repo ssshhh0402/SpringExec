@@ -1,7 +1,7 @@
 package com.example.Exec2_Chat;
 
-import com.example.Exec2_Chat.domain.ChatMessage;
-import com.example.Exec2_Chat.domain.MessageType;
+import com.example.Exec2_Chat.domain.chat.ChatMessage;
+import com.example.Exec2_Chat.domain.chat.MessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
-import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-
-import java.util.Map;
 
 
 @Component

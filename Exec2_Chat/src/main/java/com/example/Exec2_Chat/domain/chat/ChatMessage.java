@@ -1,4 +1,4 @@
-package com.example.Exec2_Chat.domain;
+package com.example.Exec2_Chat.domain.chat;
 
 public class ChatMessage {
     private MessageType type;
