@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserResponseDto {
-
+    private boolean results;
     private long id;
     private String email, password;
 
     @Builder
-    public UserResponseDto(User user){
+    public UserResponseDto(boolean result, User user){
+        this.results = result;
         this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();

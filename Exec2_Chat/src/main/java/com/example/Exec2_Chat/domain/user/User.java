@@ -1,10 +1,13 @@
 package com.example.Exec2_Chat.domain.user;
 
+import com.example.Exec2_Chat.domain.chat.ChatRoom;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,6 +22,10 @@ public class User {
 
     @Column(nullable=false)
     private String password;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    @JsonBackReference
+    private List<ChatRoom> created;
 
 
     @Builder

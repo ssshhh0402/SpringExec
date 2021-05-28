@@ -23,15 +23,25 @@ public class UserService {
     public UserResponseDto save(UserSaveRequestDto requestDto){
         String encoded = passwordEncoder.encode(requestDto.getPassword());
         User user = userRepository.save(requestDto.toEntity(encoded));
-        return new UserResponseDto(user);
+        return new UserResponseDto(true, user);
     }
 
     public List<UserResponseDto> getAll(){
         List<UserResponseDto> result = new ArrayList<UserResponseDto>();
         List<User> users = userRepository.findAll();
         for(User user : users){
-            result.add(new UserResponseDto(user));
+            result.add(new UserResponseDto(true, user));
         }
         return result;
+    }
+
+    public UserResponseDto login(UserSaveRequestDto requestDto){
+        User user = userRepository.findByEmail(requestDto.getEmail());
+        System.out.println(user);
+        if(passwordEncoder.matches(user.getPassword(), requestDto.getPassword())){
+            return new UserResponseDto(true, user);
+        }else{
+            return new UserResponseDto(false, user);
+        }
     }
 }
