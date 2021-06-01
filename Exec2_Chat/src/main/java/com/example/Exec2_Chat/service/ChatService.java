@@ -30,8 +30,11 @@ public class ChatService {
         return new ChatRoomListResponseDto(true, rooms);
     }
 
+    public ChatRoomResponseDto findOne(long id){
+        ChatRoom result = chatRoomRepository.findById(id);
+        return new ChatRoomResponseDto(result);
+    }
     public ChatRoomResponseDto save(ChatRoomSaveRequestDto requestDto){
-
         User creator = userRepository.getById(requestDto.getUserId());
         ChatRoom newOne = chatRoomRepository.save(requestDto.toEntity(creator));
         return new ChatRoomResponseDto(newOne);
