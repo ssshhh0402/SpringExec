@@ -2,6 +2,7 @@ package com.example.Exec2_Chat.service;
 
 import com.example.Exec2_Chat.domain.user.User;
 import com.example.Exec2_Chat.domain.user.UserRepository;
+import com.example.Exec2_Chat.web.dto.User.UserLoginRequestDto;
 import com.example.Exec2_Chat.web.dto.User.UserResponseDto;
 import com.example.Exec2_Chat.web.dto.User.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +36,21 @@ public class UserService {
         return result;
     }
 
-    public UserResponseDto login(UserSaveRequestDto requestDto){
+    public UserResponseDto login(UserLoginRequestDto requestDto){
         User user = userRepository.findByEmail(requestDto.getEmail());
         System.out.println(user);
-        if(passwordEncoder.matches(user.getPassword(), requestDto.getPassword())){
+        if(!passwordEncoder.matches(user.getPassword(), requestDto.getPassword())){
             return new UserResponseDto(true, user);
         }else{
             return new UserResponseDto(false, user);
+        }
+    }
+    public String deleteAll(){
+        try{
+            userRepository.deleteAll();
+            return "Success";
+        }catch(Exception e){
+            return e.toString();
         }
     }
 }

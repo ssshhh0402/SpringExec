@@ -1,15 +1,13 @@
 package com.example.Exec2_Chat.web;
 
 import com.example.Exec2_Chat.service.UserService;
+import com.example.Exec2_Chat.web.dto.User.UserLoginRequestDto;
 import com.example.Exec2_Chat.web.dto.User.UserResponseDto;
 import com.example.Exec2_Chat.web.dto.User.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +24,13 @@ public class UserApiController {
     public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto requestDto){
         return new ResponseEntity<UserResponseDto>(userService.save(requestDto), HttpStatus.OK);
     }
+    @DeleteMapping("/api/v1/user/deleteAll")
+    public ResponseEntity<String> deleteAll(){
+        return new ResponseEntity<String>(userService.deleteAll(), HttpStatus.OK);
+    }
     @PostMapping("/api/v1/user/login")
-    public ResponseEntity<UserResponseDto> login(@RequestBody UserSaveRequestDto requestDto){
+    public ResponseEntity<UserResponseDto> login(@RequestBody UserLoginRequestDto requestDto){
+        System.out.println("로그인 들어왔따!!!!!!!!!!");
         return new ResponseEntity<UserResponseDto>(userService.login(requestDto), HttpStatus.OK);
     }
 
