@@ -7,6 +7,7 @@ import { AuthContent, InputLabel, AuthButton, RightAlignedItem, AuthError } from
 import * as authActions from '../../redux/modules/auth';
 
 class LoginPage extends Component{
+    
     componentWillUnmount() {
         const { AuthActions } = this.props;
         AuthActions.initializeForm('login')
@@ -48,6 +49,7 @@ class LoginPage extends Component{
             this.setError('잘못된 계정정보입니다.');
         }
     }
+    
     
     render(){
         const { email, password } = this.props.form.toJS(); // form 에서 email 과 password 값을 읽어옴
