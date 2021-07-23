@@ -62,9 +62,9 @@ com/example/Exec1_Todo/web/dto/Mail/MailDto.java
 com/example/Exec1_Todo/web/dto/Post/PostResponseDto.java
  com.example.Exec1_Todo.web.dto.Post.PostResponseDto
  com.example.Exec1_Todo.web.dto.Post.PostResponseDto$PostResponseDtoBuilder
+com/example/Exec1_Todo/web/dto/User/UserLoginResponseDto.java
+ com.example.Exec1_Todo.web.dto.User.UserLoginResponseDto
 com/example/Exec1_Todo/web/UserApiController.java
  com.example.Exec1_Todo.web.UserApiController
 com/example/Exec1_Todo/service/UserService.java
  com.example.Exec1_Todo.service.UserService
-com/example/Exec1_Todo/web/dto/User/UserLoginResponseDto.java
- com.example.Exec1_Todo.web.dto.User.UserLoginResponseDto

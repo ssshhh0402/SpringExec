@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -15,7 +18,8 @@ public class UserApiController {
     private final UserService userService;
 
     @DeleteMapping("/api/v1/user/delete")
-    public ResponseEntity<String> deleteAll(){
+    public ResponseEntity<String> deleteAll(HttpServletRequest request){
+
         return new ResponseEntity<String>(userService.deleteAll(), HttpStatus.OK);
     }
     @DeleteMapping("/api/v1/user/delete/{userId}")
@@ -32,16 +36,29 @@ public class UserApiController {
     }
     @GetMapping("/api/v1/user/find/send/{email}")
     public ResponseEntity<String> findEmail(@PathVariable String email){
+
         return new ResponseEntity<String>(userService.findEmail(email), HttpStatus.OK);
     }
     @PostMapping("/api/v1/user")
     public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto requestDto){
         return new ResponseEntity<UserResponseDto>(userService.save(requestDto), HttpStatus.OK);
     }
+//    @PostMapping("/api/v1/user/login")
+//    public ResponseEntity<UserLoginResponseDto> login(HttpServletRequest request, @RequestBody UserLoginDto requestDto){
+//        System.out.println(request);
+//        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
+//    }
     @PostMapping("/api/v1/user/login")
-    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginDto requestDto){
-        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
-    }
+    public String login(HttpServletRequest request, @RequestBody UserLoginDto requestDto){
+        if(userService.login(requestDto)){
+            HttpSession session = request.getSession();
+            session.setAttribute("sessionId", requestDto.getEmail());
+            return "Success";
+        }else{
+            return "Fail";
+        }
+//        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
+}
     @PutMapping("api/v1/user/change")
     public ResponseEntity<UserLoginResponseDto> change(@RequestBody UserInfoChangeDto requestDto){
         return new ResponseEntity<UserLoginResponseDto>(userService.changePassword(requestDto), HttpStatus.OK);

@@ -89,12 +89,29 @@ public class UserService {
         }
         return sb.toString();
     }
-    public UserLoginResponseDto login(UserLoginDto requestDto) {
+//    public UserLoginResponseDto login(UserLoginDto requestDto) {
+//        User user = userRepository.findByEmail(requestDto.getEmail());
+//        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+//            return new UserLoginResponseDto("Success", user.getId(), user.getEmail(), user.getPassword());
+//        } else {
+//            return new UserLoginResponseDto("Failure", -1, "", "");
+//        }
+//    }
+    public boolean login(UserLoginDto requestDto) {
         User user = userRepository.findByEmail(requestDto.getEmail());
-        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-            return new UserLoginResponseDto("Success", user.getId(), user.getEmail(), user.getPassword());
-        } else {
-            return new UserLoginResponseDto("Failure", -1, "", "");
+        System.out.println("_------------");
+        System.out.println("UserId : " + user.getEmail());
+        System.out.println("REquestPassword : " + requestDto.getPassword());
+        System.out.println("UserPassword : " + user.getPassword());
+        System.out.println("-------------");
+        if(!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            System.out.println("0-00000000");
+            System.out.println("tjdrhd");
+            System.out.println("-000000000");
+            return true;
+        }else{
+            System.out.println("Failure?");
+            return false;
         }
     }
     public UserLoginResponseDto changePassword(UserInfoChangeDto requestDto){

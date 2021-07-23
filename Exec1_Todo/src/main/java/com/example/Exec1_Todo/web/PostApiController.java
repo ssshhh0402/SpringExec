@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,7 +19,11 @@ public class PostApiController {
 
 
     @GetMapping("/api/v1/post/")
-    public ResponseEntity<List<PostResponseDto>> findAllPost(){
+    public ResponseEntity<List<PostResponseDto>> findAllPost(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        System.out.println("-----------");
+        System.out.println(session.getAttribute("sessionId"));
+        System.out.println("---------");
         return new ResponseEntity<List<PostResponseDto>>(postService.findAll(), HttpStatus.OK);
     }
     @GetMapping("/api/v1/post/{id}")
