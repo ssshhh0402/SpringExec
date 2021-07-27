@@ -1,6 +1,7 @@
 package com.example.Exec1_Todo.web;
 
 import com.example.Exec1_Todo.service.PostService;
+import com.example.Exec1_Todo.web.dto.Post.PostListResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,10 +23,12 @@ public class PostApiController {
     @GetMapping("/api/v1/post/")
     public ResponseEntity<List<PostResponseDto>> findAllPost(HttpServletRequest request){
         HttpSession session = request.getSession();
-        System.out.println("-----------");
-        System.out.println(session.getAttribute("sessionId"));
-        System.out.println("---------");
-        return new ResponseEntity<List<PostResponseDto>>(postService.findAll(), HttpStatus.OK);
+        if(session.getAttribute("sessionId") != null){
+            return new ResponseEntity<List<PostResponseDto>>(postService.findAll(), HttpStatus.OK);
+        }else{
+            List<PostResponseDto> result = null;
+            return new ResponseEntity<List<PostResponseDto>>(result, HttpStatus.METHOD_NOT_ALLOWED);
+        }
     }
     @GetMapping("/api/v1/post/{id}")
     public ResponseEntity<PostResponseDto> findOne(@PathVariable long id){
@@ -34,7 +38,6 @@ public class PostApiController {
     public ResponseEntity<List<PostResponseDto>> findAllByEmail(@PathVariable String email){
         return new ResponseEntity<List<PostResponseDto>>(postService.findByEmail(email), HttpStatus.OK);
     }
-
     @PostMapping("/api/v1/post/")
     public ResponseEntity<PostResponseDto> save(@RequestBody PostSaveRequestDto requestDto){
         return new ResponseEntity<PostResponseDto>(postService.save(requestDto), HttpStatus.OK);

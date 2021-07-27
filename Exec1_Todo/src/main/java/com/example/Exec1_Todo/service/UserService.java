@@ -22,11 +22,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final MailService mailService;
+
     @Transactional
     public UserResponseDto save(UserSaveRequestDto requestDto){
         String encoded = passwordEncoder.encode(requestDto.getPassword());
         User user = userRepository.save(requestDto.toEntity(encoded));
-
         return new UserResponseDto(user);
     }
 
@@ -49,6 +49,7 @@ public class UserService {
             return "Fail";
         }
     }
+
     public UserResponseDto findByEmail(String email){
         User user = userRepository.findByEmail(email);
         return new UserResponseDto(user);
@@ -70,6 +71,7 @@ public class UserService {
             return "Fail";
         }
     }
+
     public String getRandom(){
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
@@ -97,23 +99,17 @@ public class UserService {
 //            return new UserLoginResponseDto("Failure", -1, "", "");
 //        }
 //    }
+
     public boolean login(UserLoginDto requestDto) {
         User user = userRepository.findByEmail(requestDto.getEmail());
-        System.out.println("_------------");
-        System.out.println("UserId : " + user.getEmail());
-        System.out.println("REquestPassword : " + requestDto.getPassword());
-        System.out.println("UserPassword : " + user.getPassword());
-        System.out.println("-------------");
-        if(!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-            System.out.println("0-00000000");
-            System.out.println("tjdrhd");
-            System.out.println("-000000000");
+        if(passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             return true;
         }else{
             System.out.println("Failure?");
             return false;
         }
     }
+
     public UserLoginResponseDto changePassword(UserInfoChangeDto requestDto){
         try {
             User user = userRepository.findById(requestDto.getId());
@@ -123,8 +119,8 @@ public class UserService {
             System.out.println(e.getStackTrace());
             return new UserLoginResponseDto("Failure", -1,"","");
         }
-
     }
+
     public List<UserResponseDto> findAll(){
         List<User> users = userRepository.findAll();
         List<UserResponseDto> result = new ArrayList<UserResponseDto>();

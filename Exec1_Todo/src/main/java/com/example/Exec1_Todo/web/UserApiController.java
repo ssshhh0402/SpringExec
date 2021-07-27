@@ -58,10 +58,21 @@ public class UserApiController {
             return "Fail";
         }
 //        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
-}
+    }
+
+    @GetMapping("/api/v1/user/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("sessionId") != null){
+            session.invalidate();
+            return new ResponseEntity<String>("Success", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PutMapping("api/v1/user/change")
     public ResponseEntity<UserLoginResponseDto> change(@RequestBody UserInfoChangeDto requestDto){
         return new ResponseEntity<UserLoginResponseDto>(userService.changePassword(requestDto), HttpStatus.OK);
-
     }
 }

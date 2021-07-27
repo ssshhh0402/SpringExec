@@ -4,12 +4,14 @@ import com.example.Exec1_Todo.domain.post.Post;
 import com.example.Exec1_Todo.domain.post.PostRepository;
 import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.domain.user.UserRepository;
+import com.example.Exec1_Todo.web.dto.Post.PostListResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostResponseDto;
 import com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,11 @@ public class PostService {
     private final UserRepository userRepository;
 
     public List<PostResponseDto> findAll(){
-        List<Post> posts = postRepository.findAll();
         List<PostResponseDto> result = new ArrayList<PostResponseDto>();
-        for(Post post : posts){
-            result.add(new PostResponseDto(post));
-        }
+        List<Post> posts = postRepository.findAll();
+            for(Post post : posts){
+                result.add(new PostResponseDto(post));
+            }
         return result;
     }
 

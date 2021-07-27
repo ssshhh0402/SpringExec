@@ -7,8 +7,8 @@ com/example/Exec1_Todo/config/WebConfig.java
  com.example.Exec1_Todo.config.WebConfig
 com/example/Exec1_Todo/web/dto/User/UserInfoChangeDto.java
  com.example.Exec1_Todo.web.dto.User.UserInfoChangeDto
-com/example/Exec1_Todo/service/PostService.java
- com.example.Exec1_Todo.service.PostService
+com/example/Exec1_Todo/web/dto/Post/PostListResponseDto.java
+ com.example.Exec1_Todo.web.dto.Post.PostListResponseDto
 com/example/Exec1_Todo/web/dto/Comment/CommentSaveRequestDto.java
  com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto
  com.example.Exec1_Todo.web.dto.Comment.CommentSaveRequestDto$CommentSaveRequestDtoBuilder
@@ -27,8 +27,8 @@ com/example/Exec1_Todo/web/dto/User/UserLoginDto.java
 com/example/Exec1_Todo/web/dto/User/UserSaveRequestDto.java
  com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto
  com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto$UserSaveRequestDtoBuilder
-com/example/Exec1_Todo/web/CommentApiController.java
- com.example.Exec1_Todo.web.CommentApiController
+com/example/Exec1_Todo/service/PostService.java
+ com.example.Exec1_Todo.service.PostService
 com/example/Exec1_Todo/web/dto/User/UserResponseDto.java
  com.example.Exec1_Todo.web.dto.User.UserResponseDto
  com.example.Exec1_Todo.web.dto.User.UserResponseDto$UserResponseDtoBuilder
@@ -47,8 +47,8 @@ com/example/Exec1_Todo/web/dto/Comment/CommentResponseDto.java
  com.example.Exec1_Todo.web.dto.Comment.CommentResponseDto$CommentResponseDtoBuilder
 com/example/Exec1_Todo/web/dto/Comment/SubCommentSaveRequestDto.java
  com.example.Exec1_Todo.web.dto.Comment.SubCommentSaveRequestDto
-com/example/Exec1_Todo/web/PostApiController.java
- com.example.Exec1_Todo.web.PostApiController
+com/example/Exec1_Todo/service/UserService.java
+ com.example.Exec1_Todo.service.UserService
 com/example/Exec1_Todo/domain/comment/CommentRepository.java
  com.example.Exec1_Todo.domain.comment.CommentRepository
 com/example/Exec1_Todo/config/JpaConfig.java
@@ -66,5 +66,7 @@ com/example/Exec1_Todo/web/dto/User/UserLoginResponseDto.java
  com.example.Exec1_Todo.web.dto.User.UserLoginResponseDto
 com/example/Exec1_Todo/web/UserApiController.java
  com.example.Exec1_Todo.web.UserApiController
-com/example/Exec1_Todo/service/UserService.java
- com.example.Exec1_Todo.service.UserService
+com/example/Exec1_Todo/web/PostApiController.java
+ com.example.Exec1_Todo.web.PostApiController
+com/example/Exec1_Todo/web/CommentApiController.java
+ com.example.Exec1_Todo.web.CommentApiController
