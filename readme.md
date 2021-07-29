@@ -231,3 +231,47 @@
 * 구현해야 할것
   * 참가 기능, 채팅기능
   * redis활용하면 채팅 저장기능?이 될거같은데..
+
+
+
+
+
+# 동적 Crawler
+
+* 목표 : Java Selenium 활용해서 네이버 자동 로그인 후 읽지않은 메일이 존재할 경우 해당 사실을 카카오톡으로 메세지를 날려 알려주는 기능 구현하기
+
+* 핵심 기술 :
+
+  * Java Selenium
+  * Kakao Api
+
+* Selenium vs Jsoup?
+
+  * 둘다 Crawling 하는 방법이라면 왜 굳이 Selenium이 필요한가?
+  * Selenium과 Jsoup의 차이점은 동적 / 정적 Crawling
+  * Jsoup은 정적 Crawling으로써 나에게 보여지는(내가 주어준) 화면에서의 데이터만 Crawling 가능
+  * Selenium은 동적 Crawling으로써 Crawling외에도 클릭등의 행위를 통해 내가 원하는 화면으로 이동이 가능하다
+  * 이러한 Selenium의 특징을 활용해서 웹 페이지 테스트 용도로도 많이 사용하는 것 같다.
+
+* 7 / 30
+
+  * 1차 구현
+    * Api를 통해 아이디와 비밀 번호 입력
+    * 해당 정보를 통하여 로그인을 진행하고자 시도
+    * Selenium의 send_keys 메소드를 핵심으로 사용
+    * 하지만 이렇게 했을 경우, 네이버의 자동 완성 매크로(왓챠)에 걸린다
+
+  * 2차 구현
+
+    * Api를 통해 받는것 까지는 동일
+    * 구글링을 해본 결과 파이썬에서는 Paperpy를 사용하여 입력하고자 하는 값을 Clipboard에 저장하고, 이것을 Control + V, 즉 붙여넣기로 넣는다는것을 확인
+    * 자바 Toolkit 라이브러리를 활용하여 유사하게 진행
+    * Clipboard에 저장하는것 까지는 구현
+
+  * 수정해야 할 부분
+
+    * Clipboard를 붙여넣기 하는 과정에 있어 Command + V 누르는 Action을 구현해야 한다.(난 맥북이니까)
+    * 현재 생기는 문제로써는 V를 Action에서 어떻게 찾을 것인가
+
+    
+
