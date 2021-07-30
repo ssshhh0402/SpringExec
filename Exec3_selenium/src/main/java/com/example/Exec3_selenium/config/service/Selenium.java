@@ -32,16 +32,33 @@ public class Selenium {
             webElement.click();
             webElement.clear();
             clipBoard = makeCopy(id);
-            Action actions = makeActions(driver).build();
+            Action actions = makeActions(driver);
             actions.perform();
             Thread.sleep(1000);
             webElement = driver.findElement(By.id("pw"));
             webElement.click();
             webElement.clear();
             clipBoard = makeCopy(pwd);
-            actions = makeActions(driver).build();
+            actions = makeActions(driver);
             actions.perform();
             Thread.sleep(1000);
+            webElement = driver.findElement(By.id("log.login"));
+            webElement.click();
+            try{
+                webElement = driver.findElement(By.id("new.save"));
+                webElement.click();
+            }catch(Exception e){
+                System.out.println(e.toString());
+            }
+            webElement = driver.findElement(By.className("num"));
+            System.out.println("----------------");
+            System.out.println(webElement.getText());
+            System.out.println("----------------");
+            if(webElement.getText().equals("0")){
+                driver.quit();
+            }else{
+                webElement.click();
+            }
 
         }catch(Exception e){
             System.out.println(e.toString());
@@ -54,12 +71,14 @@ public class Selenium {
         clipBoard.setContents(strings, null);
         return clipBoard;
     }
-    public Actions makeActions(WebDriver driver){
+    public Action makeActions(WebDriver driver){
         Actions action = new Actions(driver);
-        action.keyDown(Keys.COMMAND);
-        action.keyDown(Keys.getKeyFromUnicode('v'));
-        action.keyUp(Keys.COMMAND);
-        return action;
+        Action result = action
+                .keyDown(Keys.COMMAND)
+                .sendKeys("V")
+                .keyUp(Keys.COMMAND)
+                .build();
+        return result;
     }
 
 }
