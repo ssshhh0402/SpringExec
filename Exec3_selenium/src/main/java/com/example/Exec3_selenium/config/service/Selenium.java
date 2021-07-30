@@ -1,12 +1,7 @@
 package com.example.Exec3_selenium.config.service;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.util.List;
 
 
 public class Selenium {
@@ -45,19 +41,23 @@ public class Selenium {
             webElement = driver.findElement(By.id("log.login"));
             webElement.click();
             try{
-                webElement = driver.findElement(By.id("new.save"));
+                webElement = driver.findElement(By.id("new.dontsave"));
                 webElement.click();
             }catch(Exception e){
                 System.out.println(e.toString());
             }
-            webElement = driver.findElement(By.className("num"));
-            System.out.println("----------------");
-            System.out.println(webElement.getText());
-            System.out.println("----------------");
-            if(webElement.getText().equals("0")){
-                driver.quit();
+            String target = "num" + " " + "MY_MAIL_COUNT";
+            driver.get("https://mail.naver.com");
+            webElement = driver.findElement(By.id("unreadMailCount"));
+            int n = Integer.parseInt(webElement.getText());
+            if(n != 0){
+                List unreads = webElement.findElements(By.className("notRead"));
+                for(Object unread : unreads){
+                    WebElement item = (WebElement)unread;
+                    System.out.println(item);
+                }
             }else{
-                webElement.click();
+                driver.quit();
             }
 
         }catch(Exception e){
