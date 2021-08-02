@@ -51,11 +51,11 @@ public class Selenium {
             webElement = driver.findElement(By.id("unreadMailCount"));
             int n = Integer.parseInt(webElement.getText());
             if(n != 0){
-                List unreads = webElement.findElements(By.className("notRead"));
-                for(Object unread : unreads){
-                    WebElement item = (WebElement)unread;
-                    System.out.println(item);
-                }
+                webElement = driver.findElement(By.id("list_for_view"));
+                webElement = driver.findElement(By.cssSelector("ol"));
+                List items = webElement.findElements(By.cssSelector("strong"));
+                sendKakao(items);
+                driver.quit();
             }else{
                 driver.quit();
             }
@@ -64,6 +64,9 @@ public class Selenium {
             System.out.println(e.toString());
             driver.quit();
         }
+    }
+    public void sendKakao(List items){
+        
     }
     public Clipboard makeCopy(String contents){
         Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
