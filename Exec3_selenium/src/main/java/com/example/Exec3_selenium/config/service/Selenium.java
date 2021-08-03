@@ -54,19 +54,21 @@ public class Selenium {
                 webElement = driver.findElement(By.id("list_for_view"));
                 webElement = driver.findElement(By.cssSelector("ol"));
                 List items = webElement.findElements(By.cssSelector("strong"));
-                sendKakao(items);
+                sendKakao(items,n);
                 driver.quit();
             }else{
                 driver.quit();
             }
-
         }catch(Exception e){
             System.out.println(e.toString());
             driver.quit();
         }
     }
-    public void sendKakao(List items){
-        
+    public void sendKakao(List items, int n){
+            for(int i = 0; i < n; i++){
+                String now = ((WebElement)items.get(i)).getText();
+                System.out.println(now);
+            }
     }
     public Clipboard makeCopy(String contents){
         Clipboard clipBoard = Toolkit.getDefaultToolkit().getSystemClipboard();
