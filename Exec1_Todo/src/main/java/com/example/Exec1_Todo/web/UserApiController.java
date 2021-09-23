@@ -67,7 +67,7 @@ public class UserApiController {
             session.invalidate();
             return new ResponseEntity<String>("Success", HttpStatus.OK);
         }else{
-            return new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);s
+            return new ResponseEntity<String>("Failure", HttpStatus.BAD_REQUEST);
         }
     }
 
