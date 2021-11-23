@@ -2,7 +2,7 @@ package com.example.toy.service;
 
 import com.example.toy.domain.user.User;
 import com.example.toy.domain.user.UserRepository;
-import com.example.toy.web.Dto.*;
+import com.example.toy.web.Dto.User.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.toy.web.Dto;
+package com.example.toy.web.Dto.User;
 
 import com.example.toy.domain.user.User;
 import lombok.Builder;

@@ -2,7 +2,7 @@ package com.example.toy.web;
 
 import com.example.toy.domain.user.User;
 import com.example.toy.service.UserService;
-import com.example.toy.web.Dto.*;
+import com.example.toy.web.Dto.User.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,10 @@ public class UserApiController {
     public ResponseEntity<UserResponseDto> login(HttpServletRequest request, @RequestBody UserLoginRequestDto requestDto){
         LoginResult lr = userService.login(requestDto);
         if(lr.getResult()){
-            HttpSession session = request.getSession();
-            session.setAttribute("sessionId", session.getId());
+            HttpSession session = request.getSession(true);
+            session.setAttribute("EMAIL", requestDto.getEmail());
+            session.setAttribute("PWD" , requestDto.getPassword());
+            session.setAttribute("ID", session.getId());
             return new ResponseEntity<UserResponseDto>(new UserResponseDto(lr.getUser()), HttpStatus.OK);
         }else{
             return new ResponseEntity<UserResponseDto>(new UserResponseDto(lr.getUser()), HttpStatus.BAD_REQUEST);
@@ -43,9 +45,19 @@ public class UserApiController {
     }
 
     @GetMapping("/api/v1/user/check")
-    public ResponseEntity<Boolean> isLogin(HttpServletRequest request){
+    public ResponseEntity<User> isLogin(HttpServletRequest request){
         HttpSession session = request.getSession();
-        System.out.println(session);
+        if(!session.isNew()){
+            User user = new User(session.getAttribute("EMAIL").toString(), session.getAttribute("PWD").toString());
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }else{
+            User user = new User("","");
+            return new ResponseEntity<User>( user, HttpStatus.OK);
+        }
+    }
+    @GetMapping("/api/v1/user/logout")
+    public ResponseEntity<Boolean> logout(HttpServletRequest request){
+        request.getSession().invalidate();
         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 
