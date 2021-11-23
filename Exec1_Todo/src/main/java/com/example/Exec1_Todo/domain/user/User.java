@@ -34,6 +34,7 @@ public class User{
     @JsonBackReference
     private List<Comment> comments;
 
+
     @Builder
     public User(String email, String password){
         this.email = email;

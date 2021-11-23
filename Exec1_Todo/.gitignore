@@ -15,6 +15,7 @@
 *.properties
 # Generated files
 .idea/**/contentModel.xml
+application-oauth.properties
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
