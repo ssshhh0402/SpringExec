@@ -16,4 +16,5 @@ public class ChatRoomCreateRequestDto {
                 .name(this.name)
                 .build();
     }
+
 }

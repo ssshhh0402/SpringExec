@@ -32,6 +32,7 @@ public class UserApiController {
 
     @PostMapping("/api/v1/user/login")
     public ResponseEntity<UserResponseDto> login(HttpServletRequest request, @RequestBody UserLoginRequestDto requestDto){
+        // 등록되어 있지 않은 이메일 시도했을때 예외처리
         LoginResult lr = userService.login(requestDto);
         if(lr.getResult()){
             HttpSession session = request.getSession(true);
@@ -47,11 +48,18 @@ public class UserApiController {
     @GetMapping("/api/v1/user/check")
     public ResponseEntity<User> isLogin(HttpServletRequest request){
         HttpSession session = request.getSession();
+        // 로그인 잘못했을 때 판단하기
+        // 어... true, false값으로 해주기
         if(!session.isNew()){
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(session.getId());
+            System.out.println(session.getAttribute("EMAIL"));
             User user = new User(session.getAttribute("EMAIL").toString(), session.getAttribute("PWD").toString());
             return new ResponseEntity<User>(user, HttpStatus.OK);
         }else{
-            User user = new User("","");
+            // 세션에 정보 넣어주기?
+            System.out.println(session.getId());
+            User user = new User(session.getId(),"");
             return new ResponseEntity<User>( user, HttpStatus.OK);
         }
     }

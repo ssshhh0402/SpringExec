@@ -18,7 +18,7 @@ public class WebSocketEventListener {
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event){
-        System.out.println("NEW WEB SOCKET CONNECTED");
+        System.out.println("NEW WEB SOCKET CONNECTED!@#!@#!#!$!%^!^!#$!@#$!@%!^");
     }
 
     @EventListener
