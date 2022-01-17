@@ -13,21 +13,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     private CustomOAuth2UserService customOAuth2UserService;
-    @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http
-                .cors().disable()
-                .csrf().disable()
-                .formLogin().disable()
-                .headers().frameOptions().disable()
-                .and()
-                    .logout()
-                        .logoutSuccessUrl("/")
-                .and()
-                    .oauth2Login()
-                        .userInfoEndpoint()
-                            .userService(customOAuth2UserService);
-    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception{
+//        http
+//                .cors().disable()
+//                .csrf().disable()
+//                .formLogin().disable()
+//                .headers().frameOptions().disable()
+//                .and()
+//                    .logout()
+//                        .logoutSuccessUrl("/")
+//                .and()
+//                    .oauth2Login()
+//                        .userInfoEndpoint()
+//                            .userService(customOAuth2UserService);
+//    }
 
 
     @Bean
