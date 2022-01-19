@@ -1,5 +1,6 @@
 package com.example.Exec5_NoJpa.service;
 
+import com.example.Exec5_NoJpa.model.dto.LoginRequestDto;
 import com.example.Exec5_NoJpa.model.dto.UserDto;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.model.user.UserRepository;
@@ -14,14 +15,15 @@ public class UserService {
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
-    public UserDto getUser(){
-        UserDto dto = new UserDto(1, "A", "B");
-        return dto;
-    }
+
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
-    public List<User> getUserByEmail(String email){
+    public User getUserByEmail(String email){
         return userRepository.findByEmail(email);
+    }
+    public boolean login(LoginRequestDto dto){
+        User user = userRepository.findByEmail(dto.getEmail());
+        return user.getPwd().equals(dto.getPwd());
     }
 }
