@@ -18,6 +18,11 @@ public class UserRepository {
     }
 
     public List<User> findAll(){
-        return namedParameterJdbcTemplate.query(UserSql.SELECT, EmptySqlParameterSource.INSTANCE,this.userRowMapper);
+        String query = "SELECT * FROM USER";
+        return namedParameterJdbcTemplate.query(query, EmptySqlParameterSource.INSTANCE,this.userRowMapper);
+    }
+    public List<User> findByEmail(String email){
+        String query = "SELECT * FROM USER WHERE email="+email;
+        return namedParameterJdbcTemplate.query(query, EmptySqlParameterSource.INSTANCE, this.userRowMapper);
     }
 }

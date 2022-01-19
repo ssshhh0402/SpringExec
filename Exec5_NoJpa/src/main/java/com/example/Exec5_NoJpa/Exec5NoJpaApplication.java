@@ -7,8 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Exec5NoJpaApplication {
 
 	public static void main(String[] args) {
-
+		try{
 			SpringApplication.run(Exec5NoJpaApplication.class, args);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 
 	}
 
