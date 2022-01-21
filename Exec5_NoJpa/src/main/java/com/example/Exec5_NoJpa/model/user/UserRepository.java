@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,5 +32,15 @@ public class UserRepository {
         String query = UserSql.SELECT + UserSql.findEmail;
         SqlParameterSource param = new MapSqlParameterSource("email", email);
         return namedParameterJdbcTemplate.queryForObject(query,param, this.userMapper);
+    }
+    public User signUp(String email, String pwd){
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        SqlParameterSource param = new MapSqlParameterSource("Email", email)
+                .addValue("Pwd", pwd);
+        int idx= namedParameterJdbcTemplate.update(UserSql.INSERT, param, keyHolder);
+        System.out.println("-------------------------" + idx+"----------------------");
+        param = new MapSqlParameterSource("id", keyHolder.getKey().intValue());
+
+        return namedParameterJdbcTemplate.queryForObject(UserSql.SELECT+UserSql.findId, param, this.userMapper);
     }
 }

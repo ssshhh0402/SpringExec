@@ -1,10 +1,12 @@
 package com.example.Exec5_NoJpa.web;
 
 import com.example.Exec5_NoJpa.model.dto.LoginRequestDto;
+import com.example.Exec5_NoJpa.model.dto.SignUpRequestDto;
 import com.example.Exec5_NoJpa.model.dto.UserDto;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,12 +39,34 @@ public class UserController {
         try{
             userService.login(dto);
             if(!userService.login(dto)){
-                return new ResponseEntity<String>("아이디|비번 불일치", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("아이디|비번 불일치", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }catch(Exception e){
-            return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<String>("", HttpStatus.OK);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("/emailCheck")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam("email") String email){
+        try{
+            userService.checkEmail(email);
+        }catch(EmptyResultDataAccessException e){
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(false, HttpStatus.OK);
+    }
+
+    @PostMapping("/signUp")
+    public ResponseEntity<User> signUp(@RequestBody SignUpRequestDto dto){
+        try{
+            return new ResponseEntity<>(userService.signUp(dto), HttpStatus.OK);
+        }catch(Exception e){
+            System.out.println(e.toString());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
