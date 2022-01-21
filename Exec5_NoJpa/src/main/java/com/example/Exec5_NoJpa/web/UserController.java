@@ -68,5 +68,23 @@ public class UserController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/allUser")
+    public ResponseEntity<String> deleteAll(){
+        try{
+            userService.deleteAll();
+        }catch(Exception e){
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteOne(@RequestParam long id){
+        try{
+            userService.deleteOne(id);
+        }catch(Exception e){
+            return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
 
 }

@@ -34,4 +34,10 @@ public class UserService {
     public User signUp(SignUpRequestDto dto){
         return userRepository.signUp(dto.getEmail(), dto.getPwd());
     }
+    public void deleteAll(){
+        userRepository.deleteAll();
+    }
+    public void deleteOne(long id){
+        userRepository.deleteById(id);
+    }
 }

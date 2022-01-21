@@ -37,10 +37,16 @@ public class UserRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource param = new MapSqlParameterSource("Email", email)
                 .addValue("Pwd", pwd);
-        int idx= namedParameterJdbcTemplate.update(UserSql.INSERT, param, keyHolder);
-        System.out.println("-------------------------" + idx+"----------------------");
+        namedParameterJdbcTemplate.update(UserSql.INSERT, param, keyHolder);
         param = new MapSqlParameterSource("id", keyHolder.getKey().intValue());
 
         return namedParameterJdbcTemplate.queryForObject(UserSql.SELECT+UserSql.findId, param, this.userMapper);
+    }
+    public void deleteAll(){
+        namedParameterJdbcTemplate.update(UserSql.DELETEALL, EmptySqlParameterSource.INSTANCE);
+    }
+    public void deleteById(long id){
+        SqlParameterSource param = new MapSqlParameterSource("id", id);
+        namedParameterJdbcTemplate.update(UserSql.DELETE+UserSql.DELETEID, param);
     }
 }
