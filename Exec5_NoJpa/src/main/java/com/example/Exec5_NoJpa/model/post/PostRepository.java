@@ -1,6 +1,7 @@
 package com.example.Exec5_NoJpa.model.post;
 
 import com.example.Exec5_NoJpa.model.dto.post.PostSaveRequestDto;
+import com.example.Exec5_NoJpa.model.dto.post.PostUpdateRequestDto;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
@@ -27,14 +28,15 @@ public class PostRepository {
     }
 
     public Post findById(long id){
-        String query = PostSql.FIND + PostSql.FINDID;
+        String query = PostSql.FIND + PostSql.BYID;
         SqlParameterSource params = new MapSqlParameterSource("id", id);
         return namedParameterJdbcTemplate.queryForObject(query, params, this.postMapper);
     }
-    public Boolean save(PostSaveRequestDto dto){
+    public Boolean save(PostSaveRequestDto dto, String email){
         try{
             SqlParameterSource params = new MapSqlParameterSource("title", dto.getTitle())
-                    .addValue("content", dto.getContent());
+                    .addValue("content", dto.getContent())
+                    .addValue("author", email);
             namedParameterJdbcTemplate.update(PostSql.INSERT, params);
             return true;
         }catch(Exception e){
@@ -42,5 +44,16 @@ public class PostRepository {
             return false;
         }
     }
-
+    public void delete(long id){
+        String query = PostSql.DELETE + PostSql.BYID;
+        SqlParameterSource param = new MapSqlParameterSource("id", id);
+        namedParameterJdbcTemplate.update(query, param);
+    }
+    public void update(long id, String title, String content){
+        String query = PostSql.UPDATE;
+        SqlParameterSource param = new MapSqlParameterSource("title", title)
+                .addValue("content", content)
+                .addValue("id", id);
+        namedParameterJdbcTemplate.update(query, param);
+    }
 }

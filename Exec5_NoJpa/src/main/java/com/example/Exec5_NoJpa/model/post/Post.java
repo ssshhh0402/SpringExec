@@ -1,17 +1,25 @@
 package com.example.Exec5_NoJpa.model.post;
 
+import com.example.Exec5_NoJpa.model.user.User;
+
 public class Post {
     private long id;
-    private String title, content;
+    private String title, content, author;
     public Post(){
 
     }
-    public Post(long a, String b, String c){
+    public Post(long a, String b, String c, String d){
         this.id = a;
         this.title = b;
         this.content= c;
+        this.author = d;
     }
-
+    public String getAuthor(){
+        return this.author;
+    }
+    public void setAuthor(String a){
+        this.author = a;
+    }
     public long getId(){
         return this.id;
     }

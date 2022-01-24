@@ -4,6 +4,7 @@ import groovy.util.logging.Slf4j;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,6 +33,11 @@ public class UserRepository {
         String query = UserSql.SELECT + UserSql.findEmail;
         SqlParameterSource param = new MapSqlParameterSource("email", email);
         return namedParameterJdbcTemplate.queryForObject(query,param, this.userMapper);
+    }
+    public User findById(long id){
+        String query = UserSql.SELECT + UserSql.findId;
+        SqlParameterSource param = new MapSqlParameterSource("id", id);
+        return namedParameterJdbcTemplate.queryForObject(query, param, this.userMapper);
     }
     public User signUp(String email, String pwd){
         KeyHolder keyHolder = new GeneratedKeyHolder();
