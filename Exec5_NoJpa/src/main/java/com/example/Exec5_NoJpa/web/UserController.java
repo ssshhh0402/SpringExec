@@ -1,15 +1,13 @@
 package com.example.Exec5_NoJpa.web;
 
-import com.example.Exec5_NoJpa.model.dto.LoginRequestDto;
-import com.example.Exec5_NoJpa.model.dto.SignUpRequestDto;
-import com.example.Exec5_NoJpa.model.dto.UserDto;
+import com.example.Exec5_NoJpa.model.dto.user.LoginRequestDto;
+import com.example.Exec5_NoJpa.model.dto.user.SignUpRequestDto;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

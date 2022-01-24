@@ -1,8 +1,7 @@
 package com.example.Exec5_NoJpa.service;
 
-import com.example.Exec5_NoJpa.model.dto.LoginRequestDto;
-import com.example.Exec5_NoJpa.model.dto.SignUpRequestDto;
-import com.example.Exec5_NoJpa.model.dto.UserDto;
+import com.example.Exec5_NoJpa.model.dto.user.LoginRequestDto;
+import com.example.Exec5_NoJpa.model.dto.user.SignUpRequestDto;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.model.user.UserRepository;
 import org.springframework.stereotype.Service;

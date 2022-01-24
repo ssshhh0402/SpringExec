@@ -1,12 +1,11 @@
-package com.example.Exec5_NoJpa.model.dto;
+package com.example.Exec5_NoJpa.model.dto.user;
 
-public class SignUpRequestDto {
+public class LoginRequestDto {
     private String email, pwd;
-
-    public SignUpRequestDto(){
+    public LoginRequestDto(){
 
     }
-    public SignUpRequestDto(String a, String b){
+    public LoginRequestDto(String a, String b){
         this.email = a;
         this.pwd = b;
     }
@@ -14,7 +13,7 @@ public class SignUpRequestDto {
     public String getEmail(){
         return this.email;
     }
-    public void setEmail(String a){
+    public void SetEmail(String a){
         this.email = a;
     }
     public String getPwd(){
@@ -23,5 +22,4 @@ public class SignUpRequestDto {
     public void setPwd(String a){
         this.pwd = a;
     }
-
 }
