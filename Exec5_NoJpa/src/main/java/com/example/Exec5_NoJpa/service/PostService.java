@@ -8,6 +8,8 @@ import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.model.user.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,14 +29,16 @@ public class PostService {
     }
     public Boolean save(PostSaveRequestDto dto){
         User user = userRepository.findById(dto.getId());
-        return postRepository.save(dto, user.getEmail());
+        Date time = java.sql.Date.valueOf(LocalDate.now());
+        return postRepository.save(dto, user.getEmail(), time);
     }
     public void delete(long id){
         postRepository.delete(id);
     }
     public boolean update(PostUpdateRequestDto dto){
         try{
-            postRepository.update(dto.getId(), dto.getTitle(), dto.getContent());
+            Date time = java.sql.Date.valueOf(LocalDate.now());
+            postRepository.update(dto.getId(), dto.getTitle(), dto.getContent(), time);
         }catch(Exception e){
             return false;
         }

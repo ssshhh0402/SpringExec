@@ -2,6 +2,7 @@ package com.example.Exec5_NoJpa.web;
 
 import com.example.Exec5_NoJpa.model.dto.user.LoginRequestDto;
 import com.example.Exec5_NoJpa.model.dto.user.SignUpRequestDto;
+import com.example.Exec5_NoJpa.model.dto.user.UserUpdateRequestDto;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,16 @@ public class UserController {
             userService.deleteOne(id);
         }catch(Exception e){
             return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> update(@RequestBody UserUpdateRequestDto dto){
+        try{
+            userService.update(dto.getId(), dto.getPwd());
+        }catch(Exception e){
+            return new ResponseEntity<String>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("", HttpStatus.OK);
     }

@@ -39,4 +39,7 @@ public class UserService {
     public void deleteOne(long id){
         userRepository.deleteById(id);
     }
+    public void update(long id, String pwd){
+        userRepository.update(id, pwd);
+    }
 }

@@ -14,6 +14,7 @@ public class PostRowMapper implements RowMapper<Post> {
         post.setContent(st.getString("content"));
         post.setTitle(st.getString("title"));
         post.setAuthor(st.getString("author"));
+        post.setTimes(st.getDate("times"));
         return post;
     }
 }

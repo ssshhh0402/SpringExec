@@ -55,4 +55,9 @@ public class UserRepository {
         SqlParameterSource param = new MapSqlParameterSource("id", id);
         namedParameterJdbcTemplate.update(UserSql.DELETE+UserSql.DELETEID, param);
     }
+    public void update(long id, String pwd){
+        SqlParameterSource param = new MapSqlParameterSource("pwd", pwd)
+                .addValue("id", id);
+        namedParameterJdbcTemplate.update(UserSql.UPDATE, param);
+    }
 }

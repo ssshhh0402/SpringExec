@@ -1,11 +1,12 @@
 package com.example.Exec5_NoJpa.model.dto.post;
 
+
+
 public class PostSaveRequestDto {
     private long id;
     private String title, content;
 
     public PostSaveRequestDto(){
-
     }
     public PostSaveRequestDto(String a, String b, long c){
         this.title = a;
@@ -31,4 +32,5 @@ public class PostSaveRequestDto {
     public void setContent(String a){
         this.content= a;
     }
+
 }

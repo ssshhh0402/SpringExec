@@ -1,9 +1,13 @@
 package com.example.Exec5_NoJpa.model.dto.post;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class PostUpdateRequestDto {
     private long id;
     private String  title,content;
-
     public PostUpdateRequestDto(){
 
     }
@@ -30,4 +34,5 @@ public class PostUpdateRequestDto {
     public void setContent(String a){
         this.content = a;
     }
+
 }
