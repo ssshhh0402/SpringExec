@@ -42,7 +42,8 @@ public class UserController {
         }catch(Exception e){
             return new ResponseEntity<>(e.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("", HttpStatus.OK);
+        System.out.println("성공적으로 로그인이 되었다!!!!!");
+        return new ResponseEntity<>("로그인 가능", HttpStatus.OK);
     }
 
     @GetMapping("/emailCheck")
