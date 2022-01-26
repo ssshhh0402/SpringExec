@@ -29,7 +29,7 @@ public class TokenProvider {
 
     public static String getUserIdFromJwt(String token){
         Claims claims = Jwts.parser()
-                .setSigningKey(this.secret)
+                .setSigningKey(secret)
                 .parseClaimsJwt(token)
                 .getBody();
         return claims.getSubject();
