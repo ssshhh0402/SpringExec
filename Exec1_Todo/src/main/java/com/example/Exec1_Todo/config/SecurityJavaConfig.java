@@ -28,8 +28,6 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 //                        .userInfoEndpoint()
 //                            .userService(customOAuth2UserService);
 //    }
-
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

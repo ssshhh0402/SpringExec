@@ -1,13 +1,20 @@
 package com.example.Exec5_NoJpa.jwt;
 
+import com.example.Exec5_NoJpa.model.user.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 @Component
 public class TokenProvider {
@@ -28,7 +35,8 @@ public class TokenProvider {
     }
 
     public static String getUserIdFromJwt(String token){
-        Claims claims = Jwts.parser()
+        Claims claims = Jwts
+                .parser()
                 .setSigningKey(secret)
                 .parseClaimsJwt(token)
                 .getBody();
@@ -51,6 +59,7 @@ public class TokenProvider {
         }
         return false;
     }
+
 
 
 }
