@@ -19,10 +19,8 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
     private static final String AUTHORITIES_KEY="auth";
-    @Value("${jwt.secret}")
-    private static String secret;
-    @Value("${jwt.token-validity-in-seconds")
-    private static long tokenValidility;
+    private static final String secret = "secret";
+    private static final long tokenValidility = 60 * 60;
 
     public static String generateToken(Authentication authentication){
         Date expire = new Date(new Date().getTime()+tokenValidility);

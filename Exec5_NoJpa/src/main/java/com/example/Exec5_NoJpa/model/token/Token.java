@@ -2,31 +2,34 @@ package com.example.Exec5_NoJpa.model.token;
 
 public class Token {
     public static final class Request{
-        private String email;
-        private String pwd;
+        private String email12;
+        private String pwd123;
 
         public Request(){
 
         }
         public Request(String a, String b){
-            this.email = a;
-            this.pwd = b;
+            this.email12 = a;
+            this.pwd123 = b;
         }
         public String getEmail(){
-            return this.email;
+            return this.email12;
         }
         public void setId(String a){
-            this.email = a;
+            this.email12 = a;
         }
         public String getPwd(){
-            return this.pwd;
+            return this.pwd123;
         }
         public void setPwd(String a){
-            this.pwd = a;
+            this.pwd123 = a;
         }
     }
     public static final class Response{
         private String token;
+        public Response(){
+
+        }
         public Response(String a){
             this.token = a;
         }

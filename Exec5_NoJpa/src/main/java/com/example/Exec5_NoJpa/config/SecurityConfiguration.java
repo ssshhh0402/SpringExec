@@ -23,15 +23,13 @@ import java.util.Arrays;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     public SecurityConfiguration(
             TokenProvider tokenProvider,
-            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
-            JwtAccessDeniedHandler jwtAccessDeniedHandler){
+            JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint
+            ){
         this.tokenProvider = tokenProvider;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
     @Override

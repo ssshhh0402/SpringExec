@@ -3,7 +3,7 @@ package com.example.Exec5_NoJpa.model.dto.post;
 
 
 public class PostSaveRequestDto {
-    private long id;
+    private long userId;
     private String title, content;
 
     public PostSaveRequestDto(){
@@ -11,7 +11,7 @@ public class PostSaveRequestDto {
     public PostSaveRequestDto(String a, String b, long c){
         this.title = a;
         this.content = b;
-        this.id = c;
+        this.userId = c;
     }
 
     public String getTitle(){
@@ -20,11 +20,11 @@ public class PostSaveRequestDto {
     public void setTitle(String a){
         this.title = a;
     }
-    public long getId(){
-        return this.id;
+    public long getUserId(){
+        return this.userId;
     }
-    public void setId(long a){
-        this.id = a;
+    public void setUserId(long a){
+        this.userId = a;
     }
     public String getContent(){
         return this.content;

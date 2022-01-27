@@ -2,6 +2,7 @@ package com.example.Exec5_NoJpa.web;
 
 import com.example.Exec5_NoJpa.jwt.TokenProvider;
 import com.example.Exec5_NoJpa.jwt.UserAuthentication;
+import com.example.Exec5_NoJpa.model.dto.user.LoginRequestDto;
 import com.example.Exec5_NoJpa.model.token.Token;
 import com.example.Exec5_NoJpa.model.user.User;
 import com.example.Exec5_NoJpa.service.UserService;
@@ -26,7 +27,7 @@ public class AuthRestController{
     public ResponseEntity<?> login(
             final HttpServletRequest req,
             final HttpServletResponse res,
-            @RequestBody Token.Request request) throws Exception{
+            @RequestBody LoginRequestDto request) throws Exception{
         User user = userService.getUserByEmail(request.getEmail());
         if(user == null){
             throw new IllegalArgumentException("존재하지 않는 유저입니다");

@@ -28,7 +28,7 @@ public class PostService {
         return postRepository.findById(id);
     }
     public Boolean save(PostSaveRequestDto dto){
-        User user = userRepository.findById(dto.getId());
+        User user = userRepository.findById(dto.getUserId());
         Date time = java.sql.Date.valueOf(LocalDate.now());
         return postRepository.save(dto, user.getEmail(), time);
     }
