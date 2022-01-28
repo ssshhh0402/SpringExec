@@ -3,8 +3,8 @@ com/example/Exec1_Todo/domain/post/Post.java
  com.example.Exec1_Todo.domain.post.Post$PostBuilder
 com/example/Exec1_Todo/web/UserApiController.java
  com.example.Exec1_Todo.web.UserApiController
-com/example/Exec1_Todo/domain/post/PostRepository.java
- com.example.Exec1_Todo.domain.post.PostRepository
+com/example/Exec1_Todo/config/WebConfig.java
+ com.example.Exec1_Todo.config.WebConfig
 com/example/Exec1_Todo/web/dto/User/UserInfoChangeDto.java
  com.example.Exec1_Todo.web.dto.User.UserInfoChangeDto
 com/example/Exec1_Todo/service/PostService.java
@@ -72,5 +72,5 @@ com/example/Exec1_Todo/web/dto/User/UserLoginDto.java
  com.example.Exec1_Todo.web.dto.User.UserLoginDto$UserLoginDtoBuilder
 com/example/Exec1_Todo/service/CustomOAuth2UserService.java
  com.example.Exec1_Todo.service.CustomOAuth2UserService
-com/example/Exec1_Todo/config/WebConfig.java
- com.example.Exec1_Todo.config.WebConfig
+com/example/Exec1_Todo/domain/post/PostRepository.java
+ com.example.Exec1_Todo.domain.post.PostRepository
