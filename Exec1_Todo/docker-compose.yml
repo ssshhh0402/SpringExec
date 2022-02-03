@@ -1,29 +1,44 @@
-version: "3.0"
+version: "3"
 services:
-  db:
+  todo_db:
     image : mysql:8
-    container_name: nojpadb
+    container_name: todo_db
     environment:
-      MYSQL_ROOT_PASSWORD: tnsqja4856
-      MYSQL_USER : hong
-      MYSQL_PASSWORD : tnsqja4856
       MYSQL_DATABASE : todo
-      ports: "3306:3306"
-  application:
-    build : .
-    restart : on-failure
-    ports :
-      - "80:8080"
-    depends_on:
-      - db
-    container_name: nojpa
-
-    environment:
-       -DATABASE_HOST : db
-       -DATABASE_USER : hong
-       -DATABASE_NAME : todo
-       -DATABASE_PORT : 3306
+#      MYSQL_ROOT_PASSWORD: tnsqja4856
+#      MYSQL_USER : hong
+#      MYSQL_PASSWORD : tnsqja4856
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 3306:3306
+#  application:
+#    build : .
+#    restart : on-failure
+#    ports :
+#      - "80:8080"
+#    depends_on:
+#      - db
+#    container_name: nojpa
+#
+#    environment:
+#       -DATABASE_HOST : db
+#       -DATABASE_USER : hong
+#       -DATABASE_NAME : todo
+#       -DATABASE_PORT : 3306
 #      SPRING_DATASOURCE_URl: jdbc:mysql://db:3306/todo?autoReconnect=true&useSSL=true&serverTimezone=Asia/Seoul
 #      SPRING_DATASOURCE_USERNAME: hong
 #      SPRING_DATASOURCE_PASSWORD: tnsqja4856
+  todo:
+    build: .
+    ports:
+      - 8080:8080
+    restart : on-failure
+    depends_on:
+      - todo_db
+    container_name: todo
+    environment:
+      -SPRING_DATASOURCE_URL: jdbc:mysql://todo_db:3306/todo?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=true&ServerTimezone=Asia/Seoul
+      -SPRING_DATASOURCE_USERNAME: root
+      -SPRING_DATASOURCE_PASSWORD: root
 

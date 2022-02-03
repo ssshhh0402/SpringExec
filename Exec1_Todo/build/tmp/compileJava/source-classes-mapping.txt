@@ -15,8 +15,6 @@ com/example/Exec1_Todo/web/dto/Comment/CommentSaveRequestDto.java
 com/example/Exec1_Todo/web/dto/Post/PostSaveRequestDto.java
  com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto
  com.example.Exec1_Todo.web.dto.Post.PostSaveRequestDto$PostSaveRequestDtoBuilder
-com/example/Exec1_Todo/config/SecurityJavaConfig.java
- com.example.Exec1_Todo.config.SecurityJavaConfig
 com/example/Exec1_Todo/service/CommentService.java
  com.example.Exec1_Todo.service.CommentService
 com/example/Exec1_Todo/config/SwaggerConfig.java
@@ -58,8 +56,6 @@ com/example/Exec1_Todo/Exec1TodoApplication.java
  com.example.Exec1_Todo.Exec1TodoApplication
 com/example/Exec1_Todo/web/dto/User/UserLoginResponseDto.java
  com.example.Exec1_Todo.web.dto.User.UserLoginResponseDto
-com/example/Exec1_Todo/service/MailService.java
- com.example.Exec1_Todo.service.MailService
 com/example/Exec1_Todo/domain/user/Role.java
  com.example.Exec1_Todo.domain.user.Role
 com/example/Exec1_Todo/web/dto/Mail/MailDto.java
@@ -70,7 +66,5 @@ com/example/Exec1_Todo/web/dto/Post/PostResponseDto.java
 com/example/Exec1_Todo/web/dto/User/UserLoginDto.java
  com.example.Exec1_Todo.web.dto.User.UserLoginDto
  com.example.Exec1_Todo.web.dto.User.UserLoginDto$UserLoginDtoBuilder
-com/example/Exec1_Todo/service/CustomOAuth2UserService.java
- com.example.Exec1_Todo.service.CustomOAuth2UserService
 com/example/Exec1_Todo/domain/post/PostRepository.java
  com.example.Exec1_Todo.domain.post.PostRepository

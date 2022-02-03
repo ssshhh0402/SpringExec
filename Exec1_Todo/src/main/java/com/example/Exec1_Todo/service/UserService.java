@@ -3,11 +3,9 @@ package com.example.Exec1_Todo.service;
 
 import com.example.Exec1_Todo.domain.user.User;
 import com.example.Exec1_Todo.domain.user.UserRepository;
-import com.example.Exec1_Todo.web.dto.Mail.MailDto;
 import com.example.Exec1_Todo.web.dto.User.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,13 +18,10 @@ import java.util.Random;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final MailService mailService;
 
     @Transactional
     public UserResponseDto save(UserSaveRequestDto requestDto){
-        String encoded = passwordEncoder.encode(requestDto.getPassword());
-        User user = userRepository.save(requestDto.toEntity(encoded));
+        User user = userRepository.save(requestDto.toEntity(requestDto.getPassword()));
         return new UserResponseDto(user);
     }
 
@@ -55,22 +50,7 @@ public class UserService {
         return new UserResponseDto(user);
     }
 
-    public String findEmail(String email){
-        try{
-            User user = userRepository.findByEmail(email);
-            String newPassword = getRandom();
-            StringBuilder sb = new StringBuilder();
-            user.setPassword(passwordEncoder.encode(newPassword));
-            sb.append("회원님의 아이디 : ").append(user.getEmail()).append("\n");
-            sb.append("회원님의 비밀번호 : ").append(newPassword).append("\n");
-            MailDto mailDto = new MailDto(user.getEmail(),"회원님의 현재 비밀번호 입니다", sb.toString());
-            mailService.mailSend(mailDto);
-            return "Success";
-        }catch(Exception e){
-            System.out.println(e);
-            return "Fail";
-        }
-    }
+
 
     public String getRandom(){
         Random random = new Random();
@@ -91,18 +71,9 @@ public class UserService {
         }
         return sb.toString();
     }
-//    public UserLoginResponseDto login(UserLoginDto requestDto) {
-//        User user = userRepository.findByEmail(requestDto.getEmail());
-//        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
-//            return new UserLoginResponseDto("Success", user.getId(), user.getEmail(), user.getPassword());
-//        } else {
-//            return new UserLoginResponseDto("Failure", -1, "", "");
-//        }
-//    }
-
     public boolean login(UserLoginDto requestDto) {
         User user = userRepository.findByEmail(requestDto.getEmail());
-        if(passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+        if(requestDto.getPassword().equals(user.getPassword())) {
             return true;
         }else{
             System.out.println("Failure?");
@@ -113,10 +84,10 @@ public class UserService {
     public UserLoginResponseDto changePassword(UserInfoChangeDto requestDto){
         try {
             User user = userRepository.findById(requestDto.getId());
-            user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
+            user.setPassword(requestDto.getNewPassword());
             return new UserLoginResponseDto("Success", user.getId(),user.getEmail(),user.getPassword());
         }catch(Exception e){
-            System.out.println(e.getStackTrace());
+            e.getStackTrace();
             return new UserLoginResponseDto("Failure", -1,"","");
         }
     }

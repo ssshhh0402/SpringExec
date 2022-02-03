@@ -34,20 +34,11 @@ public class UserApiController {
     public ResponseEntity<UserResponseDto> findByEmail(@PathVariable String email){
         return new ResponseEntity<UserResponseDto>(userService.findByEmail(email), HttpStatus.OK);
     }
-    @GetMapping("/api/v1/user/find/send/{email}")
-    public ResponseEntity<String> findEmail(@PathVariable String email){
 
-        return new ResponseEntity<String>(userService.findEmail(email), HttpStatus.OK);
-    }
     @PostMapping("/api/v1/user")
     public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto requestDto){
         return new ResponseEntity<UserResponseDto>(userService.save(requestDto), HttpStatus.OK);
     }
-//    @PostMapping("/api/v1/user/login")
-//    public ResponseEntity<UserLoginResponseDto> login(HttpServletRequest request, @RequestBody UserLoginDto requestDto){
-//        System.out.println(request);
-//        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
-//    }
     @PostMapping("/api/v1/user/login")
     public String login(HttpServletRequest request, @RequestBody UserLoginDto requestDto){
         if(userService.login(requestDto)){
@@ -57,7 +48,6 @@ public class UserApiController {
         }else{
             return "Fail";
         }
-//        return new ResponseEntity<UserLoginResponseDto>(userService.login(requestDto), HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/user/logout")
