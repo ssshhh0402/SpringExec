@@ -1,6 +1,6 @@
 version: "3.0"
 services:
-  database:
+  db:
     image : mysql:8
     container_name: nojpadb
     environment:
@@ -15,10 +15,15 @@ services:
     ports :
       - "80:8080"
     depends_on:
-      - database
+      - db
     container_name: nojpa
 
     environment:
-      SPRING_DATASOURCE_URl: jdbc:mysql://nojpadb:3306/todo?autoReconnect=true&useSSL=true&serverTimezone=Asia/Seoul
-      SPRING_DATASOURCE_USERNAME: hong
-      SPRING_DATASOURCE_PASSWORD: tnsqja4856
+       -DATABASE_HOST : db
+       -DATABASE_USER : hong
+       -DATABASE_NAME : todo
+       -DATABASE_PORT : 3306
+#      SPRING_DATASOURCE_URl: jdbc:mysql://db:3306/todo?autoReconnect=true&useSSL=true&serverTimezone=Asia/Seoul
+#      SPRING_DATASOURCE_USERNAME: hong
+#      SPRING_DATASOURCE_PASSWORD: tnsqja4856
+
