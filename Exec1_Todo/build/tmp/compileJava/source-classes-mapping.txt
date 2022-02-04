@@ -21,6 +21,8 @@ com/example/Exec1_Todo/config/SwaggerConfig.java
  com.example.Exec1_Todo.config.SwaggerConfig
 com/example/Exec1_Todo/service/UserService.java
  com.example.Exec1_Todo.service.UserService
+com/example/Exec1_Todo/config/SecurityConfig.java
+ com.example.Exec1_Todo.config.SecurityConfig
 com/example/Exec1_Todo/web/dto/User/UserSaveRequestDto.java
  com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto
  com.example.Exec1_Todo.web.dto.User.UserSaveRequestDto$UserSaveRequestDtoBuilder

@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1/post")
 public class PostApiController {
     private final PostService postService;
 
 
-    @GetMapping("/api/v1/post/")
+    @GetMapping("")
     public ResponseEntity<List<PostResponseDto>> findAllPost(HttpServletRequest request){
         HttpSession session = request.getSession();
         if(session.getAttribute("sessionId") != null){
@@ -30,32 +30,32 @@ public class PostApiController {
             return new ResponseEntity<List<PostResponseDto>>(result, HttpStatus.METHOD_NOT_ALLOWED);
         }
     }
-    @GetMapping("/api/v1/post/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PostResponseDto> findOne(@PathVariable long id){
         return new ResponseEntity<PostResponseDto>(postService.findOne(id), HttpStatus.OK);
     }
-    @GetMapping("/api/v1/post/{email}/")
+    @GetMapping("/{email}")
     public ResponseEntity<List<PostResponseDto>> findAllByEmail(@PathVariable String email){
         return new ResponseEntity<List<PostResponseDto>>(postService.findByEmail(email), HttpStatus.OK);
     }
-    @PostMapping("/api/v1/post/")
+    @PostMapping("")
     public ResponseEntity<PostResponseDto> save(@RequestBody PostSaveRequestDto requestDto){
         return new ResponseEntity<PostResponseDto>(postService.save(requestDto), HttpStatus.OK);
     }
-    @DeleteMapping("/api/v1/post/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<String> deleteALl(){
         return new ResponseEntity<String>(postService.deleteAll(), HttpStatus.OK);
     }
-    @PutMapping("/api/v1/post/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<PostResponseDto> update(@RequestBody PostSaveRequestDto requestDto, @PathVariable long id){
         return new ResponseEntity<PostResponseDto>(postService.update(requestDto, id), HttpStatus.OK);
     }
-    @DeleteMapping("/api/v1/post/delete/{id}/")
+    @DeleteMapping("/delete/{id}/")
     public ResponseEntity<String> delete(@PathVariable long id){
         return new ResponseEntity<String>(postService.delete(id), HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/post/{email}/{isDone}/")
+    @GetMapping("/{email}/{isDone}/")
     public ResponseEntity<List<PostResponseDto>> findAllByEmailAndIsDone(@PathVariable String email, @PathVariable boolean isDone){
         return new ResponseEntity<List<PostResponseDto>>(postService.findByEmailAndIsDone(email, isDone), HttpStatus.OK);
     }

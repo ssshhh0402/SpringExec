@@ -14,32 +14,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1/user")
 public class UserApiController {
     private final UserService userService;
 
-    @DeleteMapping("/api/v1/user/delete")
+    @DeleteMapping("/delete")
     public ResponseEntity<String> deleteAll(HttpServletRequest request){
-
         return new ResponseEntity<String>(userService.deleteAll(), HttpStatus.OK);
     }
-    @DeleteMapping("/api/v1/user/delete/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<String> deleteOne( @PathVariable long userId){
         return new ResponseEntity<String>(userService.deleteOne(userId), HttpStatus.OK);
     }
-    @GetMapping("/api/v1/user/")
+
+    @GetMapping("")
     public ResponseEntity<List<UserResponseDto>> findAllUser(){
         return new ResponseEntity<List<UserResponseDto>>(userService.findAll(), HttpStatus.OK);
     }
-    @GetMapping("/api/v1/user/find/{email}")
+    @GetMapping("/find/{email}")
     public ResponseEntity<UserResponseDto> findByEmail(@PathVariable String email){
         return new ResponseEntity<UserResponseDto>(userService.findByEmail(email), HttpStatus.OK);
     }
-
-    @PostMapping("/api/v1/user")
+    @PostMapping("")
     public ResponseEntity<UserResponseDto> save(@RequestBody UserSaveRequestDto requestDto){
         return new ResponseEntity<UserResponseDto>(userService.save(requestDto), HttpStatus.OK);
     }
-    @PostMapping("/api/v1/user/login")
+    @PostMapping("/login")
     public String login(HttpServletRequest request, @RequestBody UserLoginDto requestDto){
         if(userService.login(requestDto)){
             HttpSession session = request.getSession();
@@ -50,7 +50,7 @@ public class UserApiController {
         }
     }
 
-    @GetMapping("/api/v1/user/logout")
+    @GetMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         if(session.getAttribute("sessionId") != null){
@@ -61,7 +61,7 @@ public class UserApiController {
         }
     }
 
-    @PutMapping("api/v1/user/change")
+    @PutMapping("/change")
     public ResponseEntity<UserLoginResponseDto> change(@RequestBody UserInfoChangeDto requestDto){
         return new ResponseEntity<UserLoginResponseDto>(userService.changePassword(requestDto), HttpStatus.OK);
     }
